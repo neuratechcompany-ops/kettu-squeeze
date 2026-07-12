@@ -32,6 +32,9 @@ class EngineBridge:
         self.engine = engine or SqueezeEngine()
         self.policy = policy_engine or AdaptivePolicyEngine()
         self.comparator = ShadowComparator()
+        from kettu_squeeze.dedup.engine import SessionDedup, ModelFacingPayload
+        self.dedup = SessionDedup()
+        self.model_payload = ModelFacingPayload()
         self.shadow_config = shadow_config or ShadowConfig()
         self.shadow_storage = ShadowStorage() if shadow_config and shadow_config.persist_results else None
 
