@@ -1,11 +1,12 @@
 Metadata-Version: 2.4
 Name: kettu-squeeze
-Version: 0.1.0
-Summary: Safe context compression layer for AI agents
+Version: 0.5.4
+Summary: Recoverable Context Optimization for AI agents
 Author: Aurum Kettunen
-License: MIT
+License: Apache-2.0
 Requires-Python: >=3.11
 Description-Content-Type: text/markdown
+License-File: LICENSE
 Requires-Dist: fastapi>=0.115
 Requires-Dist: uvicorn>=0.34
 Requires-Dist: pydantic>=2.10
@@ -18,46 +19,160 @@ Requires-Dist: pytest>=8.3; extra == "dev"
 Requires-Dist: pytest-asyncio>=0.24; extra == "dev"
 Requires-Dist: hypothesis>=6.122; extra == "dev"
 Requires-Dist: httpx>=0.28; extra == "dev"
+Dynamic: license-file
 
 # Kettu Squeeze
 
-Safe context compression layer for AI agents.
+**Task-Aware Context Compression for AI Agents**
 
-**Status: v0.1.0 Phase 1 — Core engine with artifact store, context ledger, and lossless compressors.**
+[![License](https://img.shields.io/badge/license-Apache%202.0-blue)](LICENSE)
+[![Python](https://img.shields.io/badge/python-3.11%2B-blue)](https://www.python.org/)
+![Status](https://img.shields.io/badge/status-Experimental-orange)
 
-## Principles
+> Kettu Squeeze is a deterministic, task-aware context compression engine for AI agents. It detects the agent's goal, protects critical facts, structurally compresses tool outputs, removes noise, and preserves exact recovery references — all without LLM or embeddings.
 
-- **Raw is authoritative.** Compression is a view, never the source of truth.
-- **Lossless by default.** Lossy requires explicit policy and recoverable refs.
-- **Session-aware.** Storage cache ≠ model visibility. Context ledger tracks what the model actually saw.
-- **Verify everything.** Every compressed output passes through a verifier.
+---
+
+## Why Kettu Squeeze
+
+AI agents consume vast tool outputs — Docker logs, Kubernetes events, pytest results, JSON APIs, Git diffs. Universal compressors often remove critical information: error codes, IDs, versions, commands. Kettu Squeeze:
+
+1. **Detects the task** (debug, test_fix, docker, k8s, git, json_api, logs...)
+2. **Protects critical facts** (errors, exit codes, paths, IDs, decisions)
+3. **Compresses supporting context** (templates, dedup, bulk folding)
+4. **Preserves recovery refs** (selective expand: single hunk, traceback, JSON path)
+
+---
+
+## Honest Benchmark
+
+| Engine | Critical Recall | Token Reduction | Unsafe |
+|--------|:--------------:|:--------------:|:------:|
+| RAW (passthrough) | 1.000 | 0.0% | 0 |
+| **Kettu v0.5.3** | **1.000** | **31.4%** | **0** |
+| SQZ v1.3.0 | 0.433 | 54.2% | 17 |
+
+*Dataset: 200 agent workflows. Tokenizer: tiktoken cl100k_base. SQZ compresses more but loses critical facts. Kettu preserves everything with meaningful reduction. Results are dataset-specific and reproducible.*
+
+---
+
+## Architecture
+
+```
+Goal / Tool History → Task Detector → Task Planner
+→ Critical Fact Extraction → Span Protection
+→ Specialized Strategy (log, json, traceback, test, git, docker, k8s...)
+→ Bulk Compaction → Delta + Session Dedup
+→ Verification / Hard Gates → Model-Facing Context
+```
+
+---
+
+## Features
+
+- **12 task types**: DEBUG, TEST_FIX, DOCKER, KUBERNETES, GIT, JSON_API, LOG_ANALYSIS, ROOT_CAUSE, CODE_REVIEW, ARCHITECTURE, CONFIG_EDIT, SEARCH
+- **20 command formatters**: git status/diff/log/show, pytest, unittest, jest, docker ps/images/logs, kubectl get/logs, npm, pip, ls, find, grep, curl
+- **Session dedup** with short refs (`§k:A1B2§`, ~4 tokens)
+- **Delta compression** for test-fix-test, JSON updates, log growth
+- **Bulk compaction**: template folding, status series, test aggregation
+- **Critical-line protection**: lines containing critical facts never collapsed
+- **Selective expand**: recover single traceback, JSON path, diff hunk, log incident
+- **3 execution modes**: LEGACY (v0.1 compat), ADAPTIVE (task-aware), SHADOW (parallel validation)
+
+---
 
 ## Install
 
 ```bash
-pip install -e .
+git clone https://github.com/neuratechcompany-ops/kettu-squeeze.git
+cd kettu-squeeze
+pip install -e ".[dev]"
 ```
+
+---
 
 ## Quick Start
 
-```bash
-# Compress a log file
-kettu-squeeze compress server.log
+```python
+from kettu_squeeze.bulk.engine import bulk_compact
 
-# Compress JSON
-kettu-squeeze compress --mode lossless data.json
+# Docker diagnostics
+docker_log = """CONTAINER ID  STATUS
+a1b2c3d4      Exited (137)
+ERROR: OOMKilled
+"""
+critical = ["Exited", "OOMKilled", "a1b2c3d4"]
 
-# Expand a reference
-kettu-squeeze expand "artifact:<artifact_id>:L10-L50"
-
-# Check system
-kettu-squeeze doctor
+result = bulk_compact(docker_log, critical)
+print(result)
+# → Exited (137) a1b2c3d4
+#   ERROR: OOMKilled
 ```
 
-## Architecture
+---
 
-See `docs/ARCHITECTURE.md` for full design.
+## When to Use
+
+- Long agent sessions with repeated tool outputs
+- Docker/Kubernetes diagnostics
+- Test-fix-test loops
+- Git workflows
+- Large JSON API responses
+- Repeated file reads
+- Growing log analysis
+- CI/CD agent pipelines
+
+---
+
+## When NOT to Use
+
+- Small prompts (<100 tokens)
+- Cryptographic material or secrets
+- Binary data
+- Tasks requiring complete verbatim text
+- Unsupported formats without safe fallback
+
+---
+
+## Limitations
+
+- **Experimental**. Not production-ready for all scenarios.
+- Task detector uses deterministic rules — may fall back to GENERIC.
+- SQZ compresses more on generic text; Kettu is stronger on structured tool outputs.
+- Requires Artifact Store for externalized data.
+- Benchmark results are dataset-specific.
+
+---
+
+## Ecosystem
+
+| Project | Purpose | Status |
+|---------|---------|--------|
+| [Kettu Mem](https://github.com/neuratechcompany-ops/kettu-mem) | Long-term agent memory | — |
+| **Kettu Squeeze** | Context compression | Experimental |
+| [Kettu Eval](https://github.com/neuratechcompany-ops/kettu-eval) | Independent evaluation | v0.2.0 |
+
+---
+
+## For Agent Developers
+
+Kettu Squeeze includes an agent skill (`skills/kettu-squeeze/`) with examples for Hermes, OpenClaw, and generic Python agents. The skill explains when to compress, how to pass task goals and tool metadata, and how to use selective expand for recovery.
+
+---
 
 ## License
 
-MIT
+Apache 2.0. See [LICENSE](LICENSE).
+
+---
+
+## Citation
+
+```bibtex
+@software{kettu-squeeze,
+  title = {Kettu Squeeze: Task-Aware Context Compression for AI Agents},
+  author = {Neuratech},
+  year = {2026},
+  url = {https://github.com/neuratechcompany-ops/kettu-squeeze}
+}
+```
