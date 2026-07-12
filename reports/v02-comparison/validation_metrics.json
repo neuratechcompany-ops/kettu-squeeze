@@ -1,0 +1,47 @@
+{
+  "keep_raw_analysis": {
+    "total_KEEP_RAW_decisions": 114,
+    "KEEP_RAW_pct": 76,
+    "overrides": 52,
+    "correct_conservative": 35,
+    "unnecessary": 0,
+    "missed_opportunity": 0,
+    "keep_raw_precision_pct": 100,
+    "unnecessary_compression_rate_pct": 0.0,
+    "missed_compression_opp_rate_pct": 0.0
+  },
+  "per_level": {
+    "L0": {
+      "count": 114,
+      "mean_in": 147,
+      "mean_out": 73,
+      "reduction_pct": 50
+    },
+    "L2": {
+      "count": 3,
+      "mean_in": 533,
+      "mean_out": 7,
+      "reduction_pct": 99
+    },
+    "L3": {
+      "count": 33,
+      "mean_in": 4487,
+      "mean_out": 1263,
+      "reduction_pct": 72
+    }
+  },
+  "comparative_summary": {
+    "adaptive_wins": 31,
+    "legacy_wins": 88,
+    "ties": 31,
+    "hard_gate_fails_both": 0,
+    "protected_fields_lost_both": 0,
+    "unsafe_compression_rate": 0,
+    "fidelity_adaptive": 1.0,
+    "fidelity_legacy": 0.619,
+    "latency_p50_adaptive_ms": 0.6,
+    "latency_p95_adaptive_ms": 5.5
+  },
+  "verdict": "V0.2-RC1 READY",
+  "note": "Adaptive is as safe as Legacy with higher fidelity (1.000 vs 0.619). KEEP_RAW precision 100%. Not yet proven better on token savings \u2014 requires new compression strategies."
+}
