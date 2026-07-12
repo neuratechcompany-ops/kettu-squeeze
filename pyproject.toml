@@ -1,9 +1,9 @@
 [project]
 name = "kettu-squeeze"
-version = "0.1.0"
+version = "0.5.4"
 description = "Recoverable Context Optimization for AI agents"
 requires-python = ">=3.11"
-license = {text = "MIT"}
+license = {text = "Apache-2.0"}
 authors = [{name = "Aurum Kettunen"}]
 readme = "README.md"
 

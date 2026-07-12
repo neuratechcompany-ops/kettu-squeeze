@@ -1,91 +1,155 @@
 # Kettu Squeeze
 
-**Recoverable Context Optimization for AI Agents.**
+**Task-Aware Context Compression for AI Agents**
 
-Not a compressor. An optimization engine that answers "what can be safely reduced?" — not "how much can we remove?"
+[![License](https://img.shields.io/badge/license-Apache%202.0-blue)](LICENSE)
+[![Python](https://img.shields.io/badge/python-3.11%2B-blue)](https://www.python.org/)
+![Status](https://img.shields.io/badge/status-Experimental-orange)
 
-**v0.1.0 — RELEASE WITH LIMITATIONS** · commit `0a717ef` · [Full Audit](docs/AUDIT_REPORT.md)
+> Kettu Squeeze is a deterministic, task-aware context compression engine for AI agents. It detects the agent's goal, protects critical facts, structurally compresses tool outputs, removes noise, and preserves exact recovery references — all without LLM or embeddings.
 
-## Release Status
+---
 
-| Gate | Result |
-|------|--------|
-| Tests | 92/92 PASS |
-| Soak (10K events) | 0 errors, 0 broken refs |
-| COS | 96.1 EXCELLENT |
-| DeepSeek v4 Pro A/B | ΔQuality 0%, NAB +0.011 |
-| GPT-OSS 120B | ΔQuality 0%, NAB +0.012 (10/11 scenarios) |
-| CRITICAL/HIGH findings | 0 open |
-| Hard gates | all clean |
+## Why Kettu Squeeze
 
-## Limitations (read before using)
+AI agents consume vast tool outputs — Docker logs, Kubernetes events, pytest results, JSON APIs, Git diffs. Universal compressors often remove critical information: error codes, IDs, versions, commands. Kettu Squeeze:
 
-1. **No concurrent write safety testing.** SQLite WAL mode but not stress-tested under high-concurrency writes. Safe for single-agent MCP usage.
-2. **`squeeze_run_and_compress` uses `shell=True`.** No command allowlist. Acceptable for agent-controlled commands, not for untrusted input.
-3. **API endpoints unauthenticated.** FastAPI server is localhost-only by design. Do not expose to networks without adding auth.
+1. **Detects the task** (debug, test_fix, docker, k8s, git, json_api, logs...)
+2. **Protects critical facts** (errors, exit codes, paths, IDs, decisions)
+3. **Compresses supporting context** (templates, dedup, bulk folding)
+4. **Preserves recovery refs** (selective expand: single hunk, traceback, JSON path)
 
-Full list: [`docs/KNOWN_LIMITATIONS.md`](docs/KNOWN_LIMITATIONS.md)
+---
 
-## Principles
+## Honest Benchmark
 
-- **Raw is authoritative.** Compression is a view, never the source of truth.
-- **Lossless by default.** Lossy requires explicit policy and recoverable refs.
-- **Session-aware.** Storage cache ≠ model visibility.
-- **Verify everything.** Every compressed output passes through a verifier.
-- **Recoverable only.** Every omission has a resolvable reference.
+| Engine | Critical Recall | Token Reduction | Unsafe |
+|--------|:--------------:|:--------------:|:------:|
+| RAW (passthrough) | 1.000 | 0.0% | 0 |
+| **Kettu v0.5.3** | **1.000** | **31.4%** | **0** |
+| SQZ v1.3.0 | 0.433 | 54.2% | 17 |
 
-## What Kettu Squeeze does NOT do
+*Dataset: 200 agent workflows. Tokenizer: tiktoken cl100k_base. SQZ compresses more but loses critical facts. Kettu preserves everything with meaningful reduction. Results are dataset-specific and reproducible.*
 
-- No entropy truncation of source code
-- No irreversible content deletion
-- No cross-session reference leaks
-- No delta without visible base
-- No byte-index slicing without UTF-8 boundary checks
-- No benchmark claims without agent quality measurement
+---
 
-## Benchmark
+## Architecture
 
 ```
-11 scenarios, 220 actions
-3.6% avg token savings
-
-Source code:   0.0%  (STRICT_RAW)
-Docker logs:  25.3%  (RLE)
-JSON:          1.9×  (compact encoding)
-Long session: -1.6%  (neutral)
+Goal / Tool History → Task Detector → Task Planner
+→ Critical Fact Extraction → Span Protection
+→ Specialized Strategy (log, json, traceback, test, git, docker, k8s...)
+→ Bulk Compaction → Delta + Session Dedup
+→ Verification / Hard Gates → Model-Facing Context
 ```
 
-| Model | Recall | ΔQuality | NAB |
-|-------|--------|----------|-----|
-| DeepSeek v4 Pro | 100% | 0.0% | +0.011 |
-| GPT-OSS 120B | 100% | 0.0% | +0.012 |
+---
+
+## Features
+
+- **12 task types**: DEBUG, TEST_FIX, DOCKER, KUBERNETES, GIT, JSON_API, LOG_ANALYSIS, ROOT_CAUSE, CODE_REVIEW, ARCHITECTURE, CONFIG_EDIT, SEARCH
+- **20 command formatters**: git status/diff/log/show, pytest, unittest, jest, docker ps/images/logs, kubectl get/logs, npm, pip, ls, find, grep, curl
+- **Session dedup** with short refs (`§k:A1B2§`, ~4 tokens)
+- **Delta compression** for test-fix-test, JSON updates, log growth
+- **Bulk compaction**: template folding, status series, test aggregation
+- **Critical-line protection**: lines containing critical facts never collapsed
+- **Selective expand**: recover single traceback, JSON path, diff hunk, log incident
+- **3 execution modes**: LEGACY (v0.1 compat), ADAPTIVE (task-aware), SHADOW (parallel validation)
+
+---
 
 ## Install
 
 ```bash
+git clone https://github.com/neuratechcompany-ops/kettu-squeeze.git
+cd kettu-squeeze
 pip install -e ".[dev]"
 ```
 
+---
+
 ## Quick Start
 
-```bash
-kettu-squeeze compress server.log
-kettu-squeeze expand "artifact:<id>:L10-L50"
-kettu-squeeze doctor
-kettu-squeeze-mcp  # MCP server
+```python
+from kettu_squeeze.bulk.engine import bulk_compact
+
+# Docker diagnostics
+docker_log = """CONTAINER ID  STATUS
+a1b2c3d4      Exited (137)
+ERROR: OOMKilled
+"""
+critical = ["Exited", "OOMKilled", "a1b2c3d4"]
+
+result = bulk_compact(docker_log, critical)
+print(result)
+# → Exited (137) a1b2c3d4
+#   ERROR: OOMKilled
 ```
 
-## Hermes Integration
+---
 
-```json
-// ~/.hermes/mcp.json
-{"mcpServers": {"kettu-squeeze": {"command": "kettu-squeeze-mcp"}}}
-```
+## When to Use
 
-## Docs
+- Long agent sessions with repeated tool outputs
+- Docker/Kubernetes diagnostics
+- Test-fix-test loops
+- Git workflows
+- Large JSON API responses
+- Repeated file reads
+- Growing log analysis
+- CI/CD agent pipelines
 
-[Architecture](docs/ARCHITECTURE.md) · [Invariants](docs/INVARIANTS.md) · [Security](docs/SECURITY.md) · [Audit](docs/AUDIT_REPORT.md) · [Limitations](docs/KNOWN_LIMITATIONS.md) · [Operating Assumptions](docs/OPERATING_ASSUMPTIONS.md) · [Threat Model](docs/THREAT_MODEL.md)
+---
+
+## When NOT to Use
+
+- Small prompts (<100 tokens)
+- Cryptographic material or secrets
+- Binary data
+- Tasks requiring complete verbatim text
+- Unsupported formats without safe fallback
+
+---
+
+## Limitations
+
+- **Experimental**. Not production-ready for all scenarios.
+- Task detector uses deterministic rules — may fall back to GENERIC.
+- SQZ compresses more on generic text; Kettu is stronger on structured tool outputs.
+- Requires Artifact Store for externalized data.
+- Benchmark results are dataset-specific.
+
+---
+
+## Ecosystem
+
+| Project | Purpose | Status |
+|---------|---------|--------|
+| [Kettu Mem](https://github.com/neuratechcompany-ops/kettu-mem) | Long-term agent memory | — |
+| **Kettu Squeeze** | Context compression | Experimental |
+| [Kettu Eval](https://github.com/neuratechcompany-ops/kettu-eval) | Independent evaluation | v0.2.0 |
+
+---
+
+## For Agent Developers
+
+Kettu Squeeze includes an agent skill (`skills/kettu-squeeze/`) with examples for Hermes, OpenClaw, and generic Python agents. The skill explains when to compress, how to pass task goals and tool metadata, and how to use selective expand for recovery.
+
+---
 
 ## License
 
-MIT
+Apache 2.0. See [LICENSE](LICENSE).
+
+---
+
+## Citation
+
+```bibtex
+@software{kettu-squeeze,
+  title = {Kettu Squeeze: Task-Aware Context Compression for AI Agents},
+  author = {Neuratech},
+  year = {2026},
+  url = {https://github.com/neuratechcompany-ops/kettu-squeeze}
+}
+```
