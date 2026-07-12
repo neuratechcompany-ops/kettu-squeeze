@@ -132,7 +132,7 @@ class TestFormatters:
         assert r.formatter == "passthrough"
 
     def test_all_formatters_registered(self):
-        assert len(FORMATTERS) == 12
+        assert len(FORMATTERS) == 20
 
     def test_format_reduces_git_diff(self):
         out = "diff --git a/x.py b/x.py\n--- a/x.py\n+++ b/x.py\n+new line\n-old line\n" * 5
