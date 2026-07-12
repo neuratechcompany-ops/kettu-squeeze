@@ -9,7 +9,7 @@ from __future__ import annotations
 import uuid
 from datetime import datetime, timezone
 from enum import Enum
-from typing import Literal
+from typing import Literal, Optional
 
 from pydantic import BaseModel, Field
 
@@ -34,6 +34,27 @@ class Visibility(str, Enum):
     SUMMARY = "summary"
     DELTA = "delta"
     REFERENCE = "reference"
+
+
+# ── RoutingDecision (v0.5.5) ─────────────────────────────────────────────────
+
+class RoutingDecision(BaseModel):
+    """Diagnostic model: explains why a compressor was chosen."""
+
+    compressor_name: str = "generic"
+    source: str = "none"  # explicit, source_type, mime_type, file_extension,
+                          # content_classifier, task_detection, fallback
+    confidence: float = 0.0
+    matched_value: str = ""
+    fallbacks_tried: list[str] = Field(default_factory=list)
+
+    def explain(self) -> str:
+        """Human-readable explanation."""
+        if self.source == "explicit":
+            return f"Selected compressor: {self.compressor_name}\nReason: explicit override"
+        if self.matched_value:
+            return f"Selected compressor: {self.compressor_name}\nReason: {self.source} {self.matched_value}"
+        return f"Selected compressor: {self.compressor_name}\nReason: {self.source}"
 
 
 # ── Core Models ──────────────────────────────────────────────────────────────
@@ -117,6 +138,8 @@ class CompressionRequest(BaseModel):
     mode: CompressionMode = CompressionMode.LOSSLESS
     tokenizer: str = "gpt-oss"
     max_tokens: int | None = None
+    # v0.5.5: explicit compressor override
+    compressor: Optional[str] = None
 
 
 class CompressionResponse(BaseModel):
@@ -135,6 +158,8 @@ class CompressionResponse(BaseModel):
     verification: VerificationResult = Field(
         default_factory=lambda: VerificationResult(passed=True, checks=[])
     )
+    # v0.5.5: routing diagnostics
+    routing: Optional[RoutingDecision] = None
 
 
 class ExpandRequest(BaseModel):
@@ -189,7 +214,7 @@ DEFAULT_POLICIES: dict[str, CompressionPolicy] = {
     "json": CompressionPolicy(
         source_type="*",
         mode=CompressionMode.LOSSLESS,
-        strip_nulls=False,  # null-stripping is semantically lossy — opt-in only
+        strip_nulls=False,
     ),
     "test_output": CompressionPolicy(
         source_type="*",
@@ -211,8 +236,10 @@ DEFAULT_POLICIES: dict[str, CompressionPolicy] = {
     ),
 }
 
-# Maps source_type / mime_type hints to policy keys
+# ── Source Type Policy Map ───────────────────────────────────────────────────
+
 SOURCE_TYPE_POLICY_MAP: dict[str, str] = {
+    # ── Source code ──
     "python": "source_code",
     "rust": "source_code",
     "javascript": "source_code",
@@ -228,16 +255,33 @@ SOURCE_TYPE_POLICY_MAP: dict[str, str] = {
     "text/x-rust": "source_code",
     "application/javascript": "source_code",
     "text/x-sh": "source_code",
+    # ── Logs ──
     "log": "log",
+    ".log": "log",
+    # ── Tests ──
     "test": "test_output",
     "pytest": "test_output",
     "go test": "test_output",
     "cargo test": "test_output",
     "jest": "test_output",
-    "json": "json",
-    "application/json": "json",
-    "git": "git_diff",
+    # ── Git / Diff (v0.5.5) ──
     "diff": "git_diff",
+    "git": "git_diff",
+    "patch": "git_diff",
+    ".diff": "git_diff",
+    ".patch": "git_diff",
+    # ── JSON (v0.5.5) ──
+    "json": "json",
+    ".json": "json",
+    "jsonl": "json",
+    ".jsonl": "json",
+    "application/json": "json",
+    "application/jsonl": "json",
+    "application/x-ndjson": "json",
+    # ── MIME / generic ──
+    "text/x-log": "log",
+    "text/plain": "default",
+    # ── Markdown / config ──
     "markdown": "markdown",
     "text/markdown": "markdown",
     "yaml": "config",

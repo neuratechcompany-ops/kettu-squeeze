@@ -1,18 +1,11 @@
 """
-Kettu Squeeze CLI — Typer-based command line interface.
+Kettu Squeeze CLI — Typer-based interface (v0.5.5).
 
-Usage:
-    kettu-squeeze compress file.log
-    kettu-squeeze compress --mode lossless file.json
-    kettu-squeeze expand "artifact:uuid:L10-L50"
-    kettu-squeeze inspect <artifact-id>
-    kettu-squeeze stats
-    kettu-squeeze doctor
+Updated: explicit --compressor flag, routing info in output.
 """
 
 from __future__ import annotations
 
-import json
 import sys
 from pathlib import Path
 from typing import Optional
@@ -23,7 +16,6 @@ from kettu_squeeze.api.engine import SqueezeEngine
 from kettu_squeeze.types import (
     CompressionMode,
     CompressionRequest,
-    ExpandRequest,
     SourceType,
 )
 
@@ -36,8 +28,7 @@ app = typer.Typer(
 engine = SqueezeEngine()
 
 
-# ── Compress ────────────────────────────────────────────────────────────────
-
+# ── compress ─────────────────────────────────────────────────────────────────
 
 @app.command()
 def compress(
@@ -45,22 +36,28 @@ def compress(
         None, help="File path to compress. Omit to read from stdin."
     ),
     mode: str = typer.Option(
-        "lossless",
-        "--mode",
-        "-m",
+        "lossless", "--mode", "-m",
         help="Compression mode: strict_raw, lossless, recoverable_lossy",
     ),
     source_type: str = typer.Option(
-        "file", "--type", "-t", help="Source type: file, tool, command, api"
+        "file", "--type", "-t",
+        help="Source type: file, tool, command, api",
+    ),
+    compressor: Optional[str] = typer.Option(
+        None, "--compressor", "-c",
+        help="Explicit compressor override (e.g., json, git_diff, log, test_output, source_code, generic)",
     ),
     tokenizer: str = typer.Option(
-        "gpt-oss", "--tokenizer", help="Tokenizer for estimation"
+        "gpt-oss", "--tokenizer", help="Tokenizer for estimation",
     ),
     session_id: str = typer.Option(
-        "cli-session", "--session", help="Session ID"
+        "cli-session", "--session", help="Session ID",
     ),
     max_tokens: Optional[int] = typer.Option(
-        None, "--max-tokens", help="Max output tokens"
+        None, "--max-tokens", help="Max output tokens",
+    ),
+    explain: bool = typer.Option(
+        False, "--explain", "-x", help="Show routing decision explaining compressor choice",
     ),
 ):
     """Compress content from a file or stdin."""
@@ -68,11 +65,11 @@ def compress(
     if path:
         content = Path(path).read_text()
         source_path = path
-        st = SourceType.FILE
+        st = SourceType(source_type) if source_type != "file" else SourceType.FILE
     else:
         content = sys.stdin.read()
         source_path = None
-        st = SourceType(source_type)  # Use --type flag, don't override
+        st = SourceType(source_type)
 
     cm = CompressionMode(mode)
 
@@ -85,6 +82,7 @@ def compress(
         mode=cm,
         tokenizer=tokenizer,
         max_tokens=max_tokens,
+        compressor=compressor,
     )
 
     response = engine.compress(request)
@@ -102,34 +100,39 @@ def compress(
         f"# Tokens: {response.original_tokens} → {response.compressed_tokens} "
         f"({response.compression_ratio:.1f}x)"
     )
+
+    # Explain routing
+    if explain and response.routing:
+        typer.echo(f"# Routing: {response.routing.explain().replace(chr(10), ' | ')}")
+        if response.routing.fallbacks_tried:
+            typer.echo(f"# Fallbacks tried: {', '.join(response.routing.fallbacks_tried)}")
+
     typer.echo("---")
     typer.echo(response.content)
 
 
-# ── Expand ──────────────────────────────────────────────────────────────────
-
+# ── expand ──────────────────────────────────────────────────────────────────
 
 @app.command()
 def expand(
     ref: str = typer.Argument(..., help="Reference to expand (e.g., artifact:uuid:L10-L50)"),
 ):
     """Expand a compressed reference back to original content."""
-    request = ExpandRequest(ref=ref, session_id="cli-session")
-    result = engine.expand(request)
+    from kettu_squeeze.types import ExpandRequest
 
-    if result is None:
-        typer.echo(f"Error: Reference not found: {ref}", err=True)
+    response = engine.expand(ExpandRequest(ref=ref))
+    if response is None:
+        typer.echo(f"✗ Reference not found: {ref}", err=True)
         raise typer.Exit(code=1)
 
-    typer.echo(f"# Artifact: {result.artifact_id}")
-    if result.line_range:
-        typer.echo(f"# Range: {result.line_range}")
+    typer.echo(f"# Artifact: {response.artifact_id}")
+    if response.line_range:
+        typer.echo(f"# Range: {response.line_range}")
     typer.echo("---")
-    typer.echo(result.content)
+    typer.echo(response.content)
 
 
-# ── Inspect ─────────────────────────────────────────────────────────────────
-
+# ── inspect ──────────────────────────────────────────────────────────────────
 
 @app.command()
 def inspect(
@@ -138,59 +141,30 @@ def inspect(
     """Show metadata for an artifact."""
     record = engine.store.get(artifact_id)
     if record is None:
-        typer.echo(f"Error: Artifact not found: {artifact_id}", err=True)
+        typer.echo(f"✗ Artifact not found: {artifact_id}", err=True)
         raise typer.Exit(code=1)
 
-    typer.echo(json.dumps(record.model_dump(), indent=2, default=str))
+    typer.echo(f"Artifact: {record.artifact_id}")
+    typer.echo(f"  Source type: {record.source_type.value}")
+    typer.echo(f"  Original size: {record.original_size} bytes")
+    typer.echo(f"  Hash: {record.content_hash}")
+    typer.echo(f"  Session: {record.session_id}")
+    if record.source_path:
+        typer.echo(f"  Source path: {record.source_path}")
 
 
-# ── Stats ───────────────────────────────────────────────────────────────────
-
+# ── stats ────────────────────────────────────────────────────────────────────
 
 @app.command()
 def stats():
     """Show compression statistics."""
-    import sqlite3
-
-    db_path = engine.store.db_path
-    conn = sqlite3.connect(str(db_path))
-    conn.row_factory = sqlite3.Row
-
-    # Count artifacts
-    total_artifacts = conn.execute(
-        "SELECT COUNT(*) as c FROM artifacts"
-    ).fetchone()["c"]
-
-    total_size = conn.execute(
-        "SELECT COALESCE(SUM(size_bytes), 0) as c FROM artifacts"
-    ).fetchone()["c"]
-
-    total_sessions = conn.execute(
-        "SELECT COUNT(DISTINCT session_id) as c FROM artifacts"
-    ).fetchone()["c"]
-
-    # Context ledger stats
-    total_entries = conn.execute(
-        "SELECT COUNT(*) as c FROM context_ledger"
-    ).fetchone()["c"]
-
-    active_entries = conn.execute(
-        "SELECT COUNT(*) as c FROM context_ledger WHERE active = 1"
-    ).fetchone()["c"]
-
-    conn.close()
-
-    typer.echo("📊 Kettu Squeeze Stats")
-    typer.echo("─" * 50)
-    typer.echo(f"  Total artifacts:     {total_artifacts}")
-    typer.echo(f"  Total size:          {_format_bytes(total_size)}")
-    typer.echo(f"  Sessions:            {total_sessions}")
-    typer.echo(f"  Context entries:     {total_entries}")
-    typer.echo(f"  Active in context:   {active_entries}")
+    count = engine.store.count()
+    size = engine.store.total_size()
+    typer.echo(f"Total artifacts: {count}")
+    typer.echo(f"Total storage: {size} bytes ({size // 1024} KB)")
 
 
-# ── Doctor ──────────────────────────────────────────────────────────────────
-
+# ── doctor ───────────────────────────────────────────────────────────────────
 
 @app.command()
 def doctor():
@@ -200,47 +174,33 @@ def doctor():
     typer.echo("🔍 Kettu Squeeze Doctor")
     typer.echo("─" * 50)
 
-    # Check storage
-    store_dir = engine.store.base_dir
-    typer.echo(f"  Storage directory: {store_dir}")
-    if store_dir.exists():
-        typer.echo("    ✓ Storage directory exists")
-    else:
-        typer.echo("    ✗ Storage directory missing")
-        ok = False
+    # Storage
+    base = engine.store.base_dir
+    typer.echo(f"  Storage directory: {base}")
+    typer.echo(f"    {'✓' if base.exists() else '✗'} Storage directory exists")
 
-    # Check DB
     db_path = engine.store.db_path
     typer.echo(f"  Database: {db_path}")
-    if db_path.exists():
-        typer.echo("    ✓ Database exists")
-    else:
-        typer.echo("    ✗ Database missing")
-        ok = False
+    typer.echo(f"    {'✓' if db_path.exists() else '✗'} Database exists")
 
-    # Check blobs
-    blob_dir = engine.store.blob_dir
-    typer.echo(f"  Blob store: {blob_dir}")
-    if blob_dir.exists():
-        typer.echo("    ✓ Blob directory exists")
-    else:
-        typer.echo("    ✗ Blob directory missing")
-        ok = False
+    blobs = base / "blobs"
+    typer.echo(f"  Blob store: {blobs}")
+    typer.echo(f"    {'✓' if blobs.exists() else '✗'} Blob directory exists")
 
-    # Check tiktoken
+    # tiktoken
     try:
         import tiktoken
         typer.echo("  tiktoken: ✓ available")
     except ImportError:
-        typer.echo("  tiktoken: ⚠ not installed (token estimates will be approximate)")
+        typer.echo("  tiktoken: ✗ not installed")
         ok = False
 
-    # Check Python version
-    version = sys.version_info
-    if version >= (3, 12):
-        typer.echo(f"  Python: ✓ {version.major}.{version.minor}.{version.micro}")
+    # Python
+    v = sys.version_info
+    if v >= (3, 11):
+        typer.echo(f"  Python: ✓ {v.major}.{v.minor}.{v.micro}")
     else:
-        typer.echo(f"  Python: ✗ {version.major}.{version.minor}.{version.micro} (need 3.12+)")
+        typer.echo(f"  Python: ✗ {v.major}.{v.minor}.{v.micro} (need 3.11+)")
         ok = False
 
     typer.echo("─" * 50)
@@ -248,17 +208,6 @@ def doctor():
         typer.echo("✅ All checks passed")
     else:
         typer.echo("⚠ Some checks failed — review above")
-
-
-# ── Helpers ─────────────────────────────────────────────────────────────────
-
-
-def _format_bytes(size: int) -> str:
-    for unit in ("B", "KB", "MB", "GB"):
-        if size < 1024:
-            return f"{size:.1f} {unit}"
-        size /= 1024
-    return f"{size:.1f} TB"
 
 
 if __name__ == "__main__":

@@ -101,14 +101,127 @@ class LogCompressor(BaseCompressor):
         # Lossless: RLE only
         return self._rle_compress(lines, policy.max_repeated_lines)
 
-    def _rle_compress(
+    # ── Pattern RLE (v0.5.5) ─────────────────────────────────────────
+
+    # Patterns safe to normalize (progress counters, timestamps, IDs, etc.)
+    _SAFE_NORMALIZE_PATTERNS: list[tuple[str, str, str]] = [
+        # progress counters: "item 42 processed"
+        (r'\b(\d+)\b', '<N>', 'progress_counter'),
+        # timestamps: ISO-ish
+        (r'\d{4}-\d{2}-\d{2}[T ]\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:?\d{2})?', '<TS>', 'timestamp'),
+        # request IDs: hex strings 8+ chars
+        (r'\b[a-f0-9]{8,64}\b', '<ID>', 'request_id'),
+        # durations: "5.2s", "10ms"
+        (r'\b\d+(?:\.\d+)?\s*(?:s|ms|µs|ns|sec|min|hour)s?\b', '<DUR>', 'duration'),
+        # sequence numbers: standalone or in brackets
+        (r'\[?\#?\d+\]?\s+(?:of|/)', '<SEQ> ', 'sequence'),
+    ]
+
+    # Values that MUST NOT be normalized (protected)
+    _PROTECTED_PATTERNS: list[tuple[str, str]] = [
+        (r'\bexit\s+code\s*[:=]?\s*\d+', 'exit_code'),
+        (r'\bstatus\s*(?:code)?\s*[:=]?\s*\d{3}', 'http_status'),
+        (r'\bversion\s*[:=]?\s*[\d.]+', 'version'),
+        (r'\bport\s*[:=]?\s*\d+', 'port'),
+        (r'\bline\s+\d+', 'line_number'),
+        (r'\berror\s+code\s*[:=]?\s*\S+', 'error_code'),
+    ]
+
+    def _is_protected(self, line: str) -> bool:
+        """Check if a line contains protected numeric values."""
+        for pattern, _name in self._PROTECTED_PATTERNS:
+            if re.search(pattern, line, re.IGNORECASE):
+                return True
+        return False
+
+    def _normalize_pattern(self, line: str) -> str:
+        """Normalize safe patterns in a line for RLE grouping."""
+        result = line
+        for pattern, replacement, _name in self._SAFE_NORMALIZE_PATTERNS:
+            result = re.sub(pattern, replacement, result)
+        return result
+
+    def _pattern_rle_compress(
         self, lines: list[str], max_repeated: int
     ) -> str:
-        """Merge identical consecutive lines with counter."""
+        """Pattern-based RLE that groups similar lines with varying numbers.
+
+        Falls back to exact RLE if pattern grouping loses information.
+        """
         if not lines:
             return ""
 
         result: list[str] = []
+        i = 0
+        while i < len(lines):
+            line = lines[i]
+            # Skip protected lines — don't pattern-normalize
+            if self._is_protected(line):
+                # Exact RLE for protected lines
+                count = 1
+                while i + count < len(lines) and lines[i + count] == line:
+                    count += 1
+                if count > max_repeated:
+                    result.append(f"{line.rstrip()} ×{count}\n")
+                else:
+                    for _ in range(count):
+                        result.append(line)
+                i += count
+                continue
+
+            # Try pattern-based grouping
+            normalized = self._normalize_pattern(line)
+            count = 1
+            unique_values: list[str] = [line.rstrip()]
+            while i + count < len(lines):
+                next_line = lines[i + count]
+                if self._is_protected(next_line):
+                    break
+                next_norm = self._normalize_pattern(next_line)
+                if next_norm == normalized:
+                    unique_values.append(next_line.rstrip())
+                    count += 1
+                else:
+                    break
+
+            if count > max_repeated:
+                # Extract numeric values from unique lines
+                nums = []
+                for v in unique_values:
+                    found = re.findall(r'\b(\d+)\b', v)
+                    if found:
+                        nums.extend(found)
+
+                if nums:
+                    sorted_nums = sorted(set(int(n) for n in nums))
+                    if len(sorted_nums) <= 5:
+                        range_str = ",".join(str(n) for n in sorted_nums)
+                    else:
+                        range_str = f"{sorted_nums[0]}-{sorted_nums[-1]}"
+                    result.append(f"{normalized.rstrip()} ×{count}; range={range_str}\n")
+                else:
+                    result.append(f"{normalized.rstrip()} ×{count}\n")
+                i += count
+            else:
+                # Not enough to group — use exact lines
+                for j in range(count):
+                    result.append(lines[i + j])
+                i += count
+
+        return "".join(result)
+
+    def _rle_compress(
+        self, lines: list[str], max_repeated: int
+    ) -> str:
+        """Merge identical consecutive lines with counter (v0.5.5: +pattern RLE)."""
+        if not lines:
+            return ""
+
+        # Try pattern RLE first
+        pattern_result = self._pattern_rle_compress(lines, max_repeated)
+
+        # Exact RLE as baseline
+        exact_result_list: list[str] = []
         i = 0
         while i < len(lines):
             line = lines[i]
@@ -120,13 +233,17 @@ class LogCompressor(BaseCompressor):
                 count += 1
 
             if count > max_repeated:
-                result.append(f"{line.rstrip()} ×{count}\n")
+                exact_result_list.append(f"{line.rstrip()} ×{count}\n")
             else:
                 for _ in range(count):
-                    result.append(line)
+                    exact_result_list.append(line)
             i += count
+        exact_result = "".join(exact_result_list)
 
-        return "".join(result)
+        # Return whichever is shorter (pattern RLE vs exact RLE)
+        if len(pattern_result) < len(exact_result):
+            return pattern_result
+        return exact_result
 
     def _lossy_compress(
         self,
