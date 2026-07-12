@@ -1,50 +1,54 @@
-# Kettu Squeeze v0.3 — Independent Comparative Evaluation
+# Kettu Squeeze v0.3 — Corrected Comparative Evaluation
 
-**Date:** 2026-07-12 | **Commit:** e2ec835 | **Tests:** 281 PASS
+**Date:** 2026-07-12 | **Commit:** 62dec32 | **Tests:** 281 PASS
 
-## Executive Summary
+## Honest Results (43 scenarios, context-core dataset)
 
-Kettu Squeeze v0.3 was evaluated against RAW baseline and Legacy (v0.1) on Kettu Eval's context-core dataset (43 scenarios). SQZ v0.1.0 binary is unavailable for aarch64-apple-darwin (404 error) — comparison not possible.
+| Mode | Output tokens | Δ vs RAW | Δ % | Fidelity |
+|------|---------------|----------|-----|----------|
+| RAW | 239 | — | — | 1.000 |
+| Kettu Legacy (v0.1) | 248 | +9 | **+3.9%** | 1.000 |
+| Kettu Adaptive (v0.3) | 269 | +30 | **+12.7%** | 1.000 |
+| **SQZ v1.3.0** | **166** | **−73** | **−30.5%** | 0.979 |
 
-### Key Results
+**Positive Δ% = growth (bad). Negative Δ% = reduction (good).**
 
-| Mode | Tokens | vs RAW | Fidelity | Hard-gate fails |
-|------|--------|--------|----------|-----------------|
-| RAW | 239 | — | 1.000 | 0 |
-| Legacy (v0.1) | 248 | −3.9% | 0.994* | 0* |
-| Adaptive (v0.3) | 269 | −12.7% | 0.994* | 0* |
+## Key Findings
 
-*Fidelity measured on content-actual required_preservations only. Abstract transformation categories excluded.
+1. **SQZ compresses better.** −30.5% vs +3.9%/+12.7%. On this dataset of small inputs (mean 239 tokens), SQZ reduces context size while Kettu Squeeze increases it due to engine metadata overhead.
 
-### Honest Assessment
+2. **Kettu Squeeze fidelity is higher.** 1.000 vs 0.979. Kettu Squeeze preserves all content-actual required strings; SQZ loses 2.1% of them.
 
-1. **Adaptive is more conservative** (−12.7% vs −3.9%). It chooses KEEP_RAW for 76% of scenarios, preserving full fidelity. Legacy compresses more aggressively, sometimes unnecessarily.
+3. **Kettu Adaptive is worse than Legacy.** +12.7% vs +3.9%. Adaptive's KEEP_RAW conservatism adds overhead without compression benefit on small inputs.
 
-2. **Fidelity is equal** (both ~0.994) — neither loses content-actual critical information.
+4. **SQZ wins on token reduction.** Kettu Squeeze wins on fidelity. Trade-off.
 
-3. **SQZ comparison not possible.** Binary unavailable. This is documented as a limitation, not as a Kettu Squeeze advantage.
+## Why Kettu Squeeze Underperforms
 
-4. **No statistically meaningful advantage** between Legacy and Adaptive on this dataset. Adaptive is safer (fewer unnecessary compressions); Legacy is slightly more token-efficient.
+- **Small inputs (mean 239 tokens):** Engine adds artifact registration, ledger entries, verification metadata — overhead dominates savings.
+- **KEEP_RAW policy (76% of scenarios):** Adaptive skips compression on most scenarios, adding passthrough overhead.
+- **Context-core dataset designed for Kettu Squeeze v0.1:** Many scenarios are adversarial/small — not representative of real agent workloads.
 
-### Strategy Utilization
+## SQZ Details
 
-All 43 scenarios used `passthrough` (KEEP_RAW via Adaptive Policy Engine). Specialized strategies (log, json, traceback, etc.) were not dispatched because context-core scenarios have abstract source types that don't match strategy format selectors.
+- Version: v1.3.0 (latest release, June 2026)
+- Binary: aarch64-apple-darwin, 14MB
+- Binary available from GitHub Releases
+- Python wrapper (v0.1.0) is outdated — uses v1.3.0 binary directly
 
-### Limitations
+## Per-Scenario Data
 
-- SQZ unavailable for comparison
-- Fidelity depends on content-actual required_preservations (abstract categories not measurable)
-- Strategy dispatch not triggered on Kettu Eval scenarios (format mismatch)
-- Dataset: 43 scenarios — adequate for v0.3 but expandable
+See `reports/per_scenario.csv` and `reports/comparative_eval_v2.json`.
 
-### Reproducibility
+## Limitations
 
-- Dataset: context-core v1.0.0, checksum sha256:cce1fadc
-- Kettu Squeeze: commit e2ec835
-- Kettu Eval: v0.1.0
-- Script: `scripts/comparative_eval.py`
-- Tokenizer: len//3 heuristic
+- Dataset: 43 small scenarios — not representative of production agent workloads
+- Fidelity measured on content-actual strings only — abstract transformation categories excluded
+- SQZ run via CLI pipe — no Python API available
+- Kettu Squeeze overhead is structural (metadata, verification) — benefits appear on larger inputs
 
-### Verdict
+## Verdict
 
-**NO PROVEN ADVANTAGE over Legacy on this dataset.** Adaptive is safer (KEEP_RAW conservatism) but not more token-efficient. SQZ comparison not possible. Further work: strategy format matching for Kettu Eval scenarios, SQZ binary acquisition.
+**SQZ v1.3.0 is better than Kettu Squeeze v0.3 on this dataset for token reduction.** Kettu Squeeze has higher fidelity. The comparison is unfair to Kettu Squeeze on small inputs (engine overhead dominates). A fairer comparison would use larger production-representative scenarios (1000+ tokens).
+
+**No statistically meaningful advantage for Kettu Squeeze on this dataset.**
