@@ -1,0 +1,81 @@
+INFO: heartbeat
+INFO: heartbeat
+INFO: heartbeat
+INFO: heartbeat
+INFO: heartbeat
+INFO: heartbeat
+INFO: heartbeat
+INFO: heartbeat
+INFO: heartbeat
+INFO: heartbeat
+INFO: heartbeat
+INFO: heartbeat
+INFO: heartbeat
+INFO: heartbeat
+INFO: heartbeat
+INFO: heartbeat
+INFO: heartbeat
+INFO: heartbeat
+INFO: heartbeat
+INFO: heartbeat
+INFO: heartbeat
+INFO: heartbeat
+INFO: heartbeat
+INFO: heartbeat
+INFO: heartbeat
+INFO: heartbeat
+INFO: heartbeat
+INFO: heartbeat
+INFO: heartbeat
+INFO: heartbeat
+INFO: heartbeat
+INFO: heartbeat
+INFO: heartbeat
+INFO: heartbeat
+INFO: heartbeat
+INFO: heartbeat
+INFO: heartbeat
+INFO: heartbeat
+INFO: heartbeat
+INFO: heartbeat
+INFO: heartbeat
+INFO: heartbeat
+INFO: heartbeat
+INFO: heartbeat
+INFO: heartbeat
+INFO: heartbeat
+INFO: heartbeat
+INFO: heartbeat
+INFO: heartbeat
+INFO: heartbeat
+WARNING: high memory
+INFO: gc completed
+INFO: gc completed
+INFO: gc completed
+INFO: gc completed
+INFO: gc completed
+INFO: gc completed
+INFO: gc completed
+INFO: gc completed
+INFO: gc completed
+INFO: gc completed
+INFO: gc completed
+INFO: gc completed
+INFO: gc completed
+INFO: gc completed
+INFO: gc completed
+INFO: gc completed
+INFO: gc completed
+INFO: gc completed
+INFO: gc completed
+INFO: gc completed
+INFO: gc completed
+INFO: gc completed
+INFO: gc completed
+INFO: gc completed
+INFO: gc completed
+INFO: gc completed
+INFO: gc completed
+INFO: gc completed
+INFO: gc completed
+INFO: gc completed

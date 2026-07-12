@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File 'worker.py', line 45, in process
+    result = db.query(sql)
+  File 'db.py', line 18, in query
+    raise DatabaseError('connection lost')
+DatabaseError: connection lost

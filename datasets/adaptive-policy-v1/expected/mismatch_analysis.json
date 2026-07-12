@@ -1,0 +1,116 @@
+{
+  "total_scenarios": 150,
+  "total_mismatches": 88,
+  "mismatch_rate": 0.5866666666666667,
+  "calibration_mismatches": 59,
+  "top_reasons": [
+    [
+      "keep_raw: importance=100% pressure=emergency",
+      25
+    ],
+    [
+      "aggressive: pressure=emergency importance=5%",
+      21
+    ],
+    [
+      "keep_raw: importance=95% pressure=emergency",
+      12
+    ],
+    [
+      "aggressive: pressure=emergency importance=40%",
+      7
+    ],
+    [
+      "keep_raw: importance=75% pressure=high",
+      4
+    ],
+    [
+      "keep_raw: importance=75% pressure=emergency",
+      4
+    ],
+    [
+      "keep_raw: importance=5% pressure=high",
+      4
+    ],
+    [
+      "keep_raw: importance=95% pressure=high",
+      3
+    ],
+    [
+      "keep_raw: importance=5% pressure=emergency",
+      3
+    ],
+    [
+      "moderate: pressure=high importance=40%",
+      3
+    ]
+  ],
+  "top_mappings": [
+    [
+      "COMPRESS_AGGRESSIVE/L3 \u2192 keep_raw/L0",
+      22
+    ],
+    [
+      "COMPRESS/L2 \u2192 keep_raw/L0",
+      21
+    ],
+    [
+      "COMPRESS/L1 \u2192 keep_raw/L0",
+      14
+    ],
+    [
+      "EXTERNALIZE/L3 \u2192 compress_aggressive/L3",
+      8
+    ],
+    [
+      "COMPRESS/L2 \u2192 compress_aggressive/L3",
+      7
+    ],
+    [
+      "COMPRESS_AGGRESSIVE/L2 \u2192 compress_aggressive/L3",
+      7
+    ],
+    [
+      "COMPRESS/L1 \u2192 compress_aggressive/L3",
+      6
+    ],
+    [
+      "COMPRESS_AGGRESSIVE/L1 \u2192 compress/L2",
+      3
+    ]
+  ],
+  "by_category": {
+    "logs": {
+      "mismatches": 17,
+      "total": 21
+    },
+    "conversation": {
+      "mismatches": 16,
+      "total": 20
+    },
+    "mixed_critical": {
+      "mismatches": 15,
+      "total": 15
+    },
+    "json": {
+      "mismatches": 10,
+      "total": 19
+    },
+    "repeated_noise": {
+      "mismatches": 10,
+      "total": 10
+    },
+    "large_payloads": {
+      "mismatches": 10,
+      "total": 10
+    },
+    "tracebacks": {
+      "mismatches": 5,
+      "total": 15
+    },
+    "externalize": {
+      "mismatches": 5,
+      "total": 5
+    }
+  }
+}

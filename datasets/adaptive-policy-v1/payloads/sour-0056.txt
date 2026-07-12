@@ -1,0 +1,3 @@
+async def query(sql: str) -> Result:
+    conn = await get_connection()
+    return await conn.execute(sql)

@@ -1,0 +1,3284 @@
+scenarios:
+- category: logs
+  ground_truth:
+    acceptable_actions:
+    - KEEP_RAW
+    acceptable_levels:
+    - L0
+    expected_action: KEEP_RAW
+    expected_level: L0
+    expected_reason_keywords:
+    - small payload
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - connection refused
+    recoverability_required: false
+  input_tokens: 8
+  payload_file: payloads/logs-0001.txt
+  pressure_level: LOW
+  scenario_id: logs-0001
+  source_type: log
+  split: calibration
+- category: logs
+  ground_truth:
+    acceptable_actions:
+    - KEEP_RAW
+    acceptable_levels:
+    - L0
+    expected_action: KEEP_RAW
+    expected_level: L0
+    expected_reason_keywords:
+    - small payload
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields: []
+    recoverability_required: false
+  input_tokens: 17
+  payload_file: payloads/logs-0002.txt
+  pressure_level: LOW
+  scenario_id: logs-0002
+  source_type: log
+  split: holdout
+- category: logs
+  ground_truth:
+    acceptable_actions:
+    - COMPRESS
+    acceptable_levels:
+    - L1
+    expected_action: COMPRESS
+    expected_level: L1
+    expected_reason_keywords:
+    - repeated_lines
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - 'WARNING: disk usage 85%'
+    recoverability_required: true
+  input_tokens: 214
+  payload_file: payloads/logs-0003.txt
+  pressure_level: MODERATE
+  scenario_id: logs-0003
+  source_type: log
+  split: calibration
+- category: logs
+  ground_truth:
+    acceptable_actions:
+    - COMPRESS
+    acceptable_levels:
+    - L1
+    expected_action: COMPRESS
+    expected_level: L1
+    expected_reason_keywords:
+    - repeated_lines
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - 'WARNING: disk usage 85%'
+    recoverability_required: true
+  input_tokens: 214
+  payload_file: payloads/logs-0004.txt
+  pressure_level: MODERATE
+  scenario_id: logs-0004
+  source_type: log
+  split: calibration
+- category: logs
+  ground_truth:
+    acceptable_actions:
+    - COMPRESS
+    acceptable_levels:
+    - L1
+    expected_action: COMPRESS
+    expected_level: L1
+    expected_reason_keywords:
+    - repeated_lines
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - 'WARNING: disk usage 85%'
+    recoverability_required: true
+  input_tokens: 214
+  payload_file: payloads/logs-0005.txt
+  pressure_level: MODERATE
+  scenario_id: logs-0005
+  source_type: log
+  split: calibration
+- category: logs
+  ground_truth:
+    acceptable_actions:
+    - COMPRESS
+    acceptable_levels:
+    - L1
+    expected_action: COMPRESS
+    expected_level: L1
+    expected_reason_keywords:
+    - repeated_lines
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - 'WARNING: disk usage 85%'
+    recoverability_required: true
+  input_tokens: 214
+  payload_file: payloads/logs-0006.txt
+  pressure_level: MODERATE
+  scenario_id: logs-0006
+  source_type: log
+  split: calibration
+- category: logs
+  ground_truth:
+    acceptable_actions:
+    - COMPRESS
+    acceptable_levels:
+    - L2
+    expected_action: COMPRESS
+    expected_level: L2
+    expected_reason_keywords:
+    - errors_preserved
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - 'ERROR: timeout'
+    - port 5432
+    recoverability_required: true
+  input_tokens: 72
+  payload_file: payloads/logs-0007.txt
+  pressure_level: HIGH
+  scenario_id: logs-0007
+  source_type: log
+  split: calibration
+- category: logs
+  ground_truth:
+    acceptable_actions:
+    - COMPRESS
+    acceptable_levels:
+    - L2
+    expected_action: COMPRESS
+    expected_level: L2
+    expected_reason_keywords:
+    - errors_preserved
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - 'ERROR: timeout'
+    - port 5432
+    recoverability_required: true
+  input_tokens: 72
+  payload_file: payloads/logs-0008.txt
+  pressure_level: HIGH
+  scenario_id: logs-0008
+  source_type: log
+  split: calibration
+- category: logs
+  ground_truth:
+    acceptable_actions:
+    - COMPRESS
+    acceptable_levels:
+    - L2
+    expected_action: COMPRESS
+    expected_level: L2
+    expected_reason_keywords:
+    - errors_preserved
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - 'ERROR: timeout'
+    - port 5432
+    recoverability_required: true
+  input_tokens: 72
+  payload_file: payloads/logs-0009.txt
+  pressure_level: HIGH
+  scenario_id: logs-0009
+  source_type: log
+  split: calibration
+- category: logs
+  ground_truth:
+    acceptable_actions:
+    - COMPRESS
+    acceptable_levels:
+    - L2
+    expected_action: COMPRESS
+    expected_level: L2
+    expected_reason_keywords:
+    - errors_preserved
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - 'ERROR: timeout'
+    - port 5432
+    recoverability_required: true
+  input_tokens: 72
+  payload_file: payloads/logs-0010.txt
+  pressure_level: HIGH
+  scenario_id: logs-0010
+  source_type: log
+  split: calibration
+- category: logs
+  ground_truth:
+    acceptable_actions:
+    - COMPRESS
+    acceptable_levels:
+    - L2
+    expected_action: COMPRESS
+    expected_level: L2
+    expected_reason_keywords:
+    - errors_preserved
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - 'ERROR: timeout'
+    - port 5432
+    recoverability_required: true
+  input_tokens: 72
+  payload_file: payloads/logs-0011.txt
+  pressure_level: HIGH
+  scenario_id: logs-0011
+  source_type: log
+  split: calibration
+- category: logs
+  ground_truth:
+    acceptable_actions:
+    - COMPRESS
+    acceptable_levels:
+    - L2
+    expected_action: COMPRESS
+    expected_level: L2
+    expected_reason_keywords:
+    - errors_preserved
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - 'ERROR: timeout'
+    - port 5432
+    recoverability_required: true
+  input_tokens: 72
+  payload_file: payloads/logs-0012.txt
+  pressure_level: HIGH
+  scenario_id: logs-0012
+  source_type: log
+  split: calibration
+- category: logs
+  ground_truth:
+    acceptable_actions:
+    - COMPRESS_AGGRESSIVE
+    acceptable_levels:
+    - L3
+    expected_action: COMPRESS_AGGRESSIVE
+    expected_level: L3
+    expected_reason_keywords:
+    - aggressive
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - 'WARNING: high memory'
+    recoverability_required: false
+  input_tokens: 463
+  payload_file: payloads/logs-0013.txt
+  pressure_level: CRITICAL
+  scenario_id: logs-0013
+  source_type: log
+  split: calibration
+- category: logs
+  ground_truth:
+    acceptable_actions:
+    - COMPRESS_AGGRESSIVE
+    acceptable_levels:
+    - L3
+    expected_action: COMPRESS_AGGRESSIVE
+    expected_level: L3
+    expected_reason_keywords:
+    - aggressive
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - 'WARNING: high memory'
+    recoverability_required: false
+  input_tokens: 463
+  payload_file: payloads/logs-0014.txt
+  pressure_level: CRITICAL
+  scenario_id: logs-0014
+  source_type: log
+  split: calibration
+- category: logs
+  ground_truth:
+    acceptable_actions:
+    - COMPRESS_AGGRESSIVE
+    acceptable_levels:
+    - L3
+    expected_action: COMPRESS_AGGRESSIVE
+    expected_level: L3
+    expected_reason_keywords:
+    - aggressive
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - 'WARNING: high memory'
+    recoverability_required: false
+  input_tokens: 463
+  payload_file: payloads/logs-0015.txt
+  pressure_level: CRITICAL
+  scenario_id: logs-0015
+  source_type: log
+  split: calibration
+- category: logs
+  ground_truth:
+    acceptable_actions:
+    - COMPRESS_AGGRESSIVE
+    acceptable_levels:
+    - L3
+    expected_action: COMPRESS_AGGRESSIVE
+    expected_level: L3
+    expected_reason_keywords:
+    - aggressive
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - 'WARNING: high memory'
+    recoverability_required: false
+  input_tokens: 463
+  payload_file: payloads/logs-0016.txt
+  pressure_level: CRITICAL
+  scenario_id: logs-0016
+  source_type: log
+  split: calibration
+- category: logs
+  ground_truth:
+    acceptable_actions:
+    - COMPRESS_AGGRESSIVE
+    acceptable_levels:
+    - L3
+    expected_action: COMPRESS_AGGRESSIVE
+    expected_level: L3
+    expected_reason_keywords:
+    - emergency
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields: []
+    recoverability_required: false
+  input_tokens: 366
+  payload_file: payloads/logs-0017.txt
+  pressure_level: EMERGENCY
+  scenario_id: logs-0017
+  source_type: log
+  split: holdout
+- category: logs
+  ground_truth:
+    acceptable_actions:
+    - COMPRESS_AGGRESSIVE
+    acceptable_levels:
+    - L3
+    expected_action: COMPRESS_AGGRESSIVE
+    expected_level: L3
+    expected_reason_keywords:
+    - emergency
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields: []
+    recoverability_required: false
+  input_tokens: 366
+  payload_file: payloads/logs-0018.txt
+  pressure_level: EMERGENCY
+  scenario_id: logs-0018
+  source_type: log
+  split: calibration
+- category: logs
+  ground_truth:
+    acceptable_actions:
+    - KEEP_RAW
+    acceptable_levels:
+    - L0
+    expected_action: KEEP_RAW
+    expected_level: L0
+    expected_reason_keywords:
+    - protected_content
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - CVE-2026-0001
+    - api_key
+    recoverability_required: false
+  input_tokens: 24
+  payload_file: payloads/logs-0019.txt
+  pressure_level: LOW
+  scenario_id: logs-0019
+  source_type: log
+  split: holdout
+- category: logs
+  ground_truth:
+    acceptable_actions:
+    - KEEP_RAW
+    acceptable_levels:
+    - L0
+    expected_action: KEEP_RAW
+    expected_level: L0
+    expected_reason_keywords:
+    - critical_error
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - Traceback
+    - AuthError
+    - line 42
+    recoverability_required: false
+  input_tokens: 36
+  payload_file: payloads/logs-0020.txt
+  pressure_level: LOW
+  scenario_id: logs-0020
+  source_type: log
+  split: calibration
+- category: json
+  ground_truth:
+    acceptable_actions:
+    - KEEP_RAW
+    acceptable_levels:
+    - L0
+    expected_action: KEEP_RAW
+    expected_level: L0
+    expected_reason_keywords:
+    - small payload
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields: []
+    recoverability_required: false
+  input_tokens: 9
+  payload_file: payloads/json-0021.txt
+  pressure_level: LOW
+  scenario_id: json-0021
+  source_type: json
+  split: calibration
+- category: json
+  ground_truth:
+    acceptable_actions:
+    - COMPRESS
+    acceptable_levels:
+    - L1
+    expected_action: COMPRESS
+    expected_level: L1
+    expected_reason_keywords:
+    - structural
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - id
+    - name
+    - total
+    recoverability_required: true
+  input_tokens: 1006
+  payload_file: payloads/json-0022.txt
+  pressure_level: HIGH
+  scenario_id: json-0022
+  source_type: json
+  split: calibration
+- category: json
+  ground_truth:
+    acceptable_actions:
+    - COMPRESS
+    acceptable_levels:
+    - L1
+    expected_action: COMPRESS
+    expected_level: L1
+    expected_reason_keywords:
+    - structural
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - id
+    - name
+    - total
+    recoverability_required: true
+  input_tokens: 1006
+  payload_file: payloads/json-0023.txt
+  pressure_level: HIGH
+  scenario_id: json-0023
+  source_type: json
+  split: calibration
+- category: json
+  ground_truth:
+    acceptable_actions:
+    - COMPRESS
+    acceptable_levels:
+    - L1
+    expected_action: COMPRESS
+    expected_level: L1
+    expected_reason_keywords:
+    - structural
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - id
+    - name
+    - total
+    recoverability_required: true
+  input_tokens: 1006
+  payload_file: payloads/json-0024.txt
+  pressure_level: HIGH
+  scenario_id: json-0024
+  source_type: json
+  split: calibration
+- category: json
+  ground_truth:
+    acceptable_actions:
+    - COMPRESS
+    acceptable_levels:
+    - L1
+    expected_action: COMPRESS
+    expected_level: L1
+    expected_reason_keywords:
+    - structural
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - id
+    - name
+    - total
+    recoverability_required: true
+  input_tokens: 1006
+  payload_file: payloads/json-0025.txt
+  pressure_level: HIGH
+  scenario_id: json-0025
+  source_type: json
+  split: calibration
+- category: json
+  ground_truth:
+    acceptable_actions:
+    - COMPRESS
+    acceptable_levels:
+    - L1
+    expected_action: COMPRESS
+    expected_level: L1
+    expected_reason_keywords:
+    - structural
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - id
+    - name
+    - total
+    recoverability_required: true
+  input_tokens: 1006
+  payload_file: payloads/json-0026.txt
+  pressure_level: HIGH
+  scenario_id: json-0026
+  source_type: json
+  split: calibration
+- category: json
+  ground_truth:
+    acceptable_actions:
+    - COMPRESS
+    acceptable_levels:
+    - L1
+    expected_action: COMPRESS
+    expected_level: L1
+    expected_reason_keywords:
+    - structural
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - id
+    - name
+    - total
+    recoverability_required: true
+  input_tokens: 1006
+  payload_file: payloads/json-0027.txt
+  pressure_level: HIGH
+  scenario_id: json-0027
+  source_type: json
+  split: calibration
+- category: json
+  ground_truth:
+    acceptable_actions:
+    - COMPRESS_AGGRESSIVE
+    acceptable_levels:
+    - L3
+    expected_action: COMPRESS_AGGRESSIVE
+    expected_level: L3
+    expected_reason_keywords:
+    - large_payload
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - version
+    - '2.0'
+    - checksum
+    - abc123
+    recoverability_required: false
+  input_tokens: 9614
+  payload_file: payloads/json-0028.txt
+  pressure_level: CRITICAL
+  scenario_id: json-0028
+  source_type: json
+  split: calibration
+- category: json
+  ground_truth:
+    acceptable_actions:
+    - COMPRESS_AGGRESSIVE
+    acceptable_levels:
+    - L3
+    expected_action: COMPRESS_AGGRESSIVE
+    expected_level: L3
+    expected_reason_keywords:
+    - large_payload
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - version
+    - '2.0'
+    - checksum
+    - abc123
+    recoverability_required: false
+  input_tokens: 9614
+  payload_file: payloads/json-0029.txt
+  pressure_level: CRITICAL
+  scenario_id: json-0029
+  source_type: json
+  split: calibration
+- category: json
+  ground_truth:
+    acceptable_actions:
+    - COMPRESS_AGGRESSIVE
+    acceptable_levels:
+    - L3
+    expected_action: COMPRESS_AGGRESSIVE
+    expected_level: L3
+    expected_reason_keywords:
+    - large_payload
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - version
+    - '2.0'
+    - checksum
+    - abc123
+    recoverability_required: false
+  input_tokens: 9614
+  payload_file: payloads/json-0030.txt
+  pressure_level: CRITICAL
+  scenario_id: json-0030
+  source_type: json
+  split: calibration
+- category: json
+  ground_truth:
+    acceptable_actions:
+    - COMPRESS_AGGRESSIVE
+    acceptable_levels:
+    - L3
+    expected_action: COMPRESS_AGGRESSIVE
+    expected_level: L3
+    expected_reason_keywords:
+    - large_payload
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - version
+    - '2.0'
+    - checksum
+    - abc123
+    recoverability_required: false
+  input_tokens: 9614
+  payload_file: payloads/json-0031.txt
+  pressure_level: CRITICAL
+  scenario_id: json-0031
+  source_type: json
+  split: holdout
+- category: json
+  ground_truth:
+    acceptable_actions:
+    - COMPRESS_AGGRESSIVE
+    acceptable_levels:
+    - L3
+    expected_action: COMPRESS_AGGRESSIVE
+    expected_level: L3
+    expected_reason_keywords:
+    - large_payload
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - version
+    - '2.0'
+    - checksum
+    - abc123
+    recoverability_required: false
+  input_tokens: 9614
+  payload_file: payloads/json-0032.txt
+  pressure_level: CRITICAL
+  scenario_id: json-0032
+  source_type: json
+  split: calibration
+- category: json
+  ground_truth:
+    acceptable_actions:
+    - COMPRESS
+    acceptable_levels:
+    - L1
+    expected_action: COMPRESS
+    expected_level: L1
+    expected_reason_keywords:
+    - null_preservation
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - 'null'
+    - b
+    - c
+    recoverability_required: true
+  input_tokens: 11
+  payload_file: payloads/json-0033.txt
+  pressure_level: MODERATE
+  scenario_id: json-0033
+  source_type: json
+  split: holdout
+- category: json
+  ground_truth:
+    acceptable_actions:
+    - COMPRESS
+    acceptable_levels:
+    - L1
+    expected_action: COMPRESS
+    expected_level: L1
+    expected_reason_keywords:
+    - null_preservation
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - 'null'
+    - b
+    - c
+    recoverability_required: true
+  input_tokens: 11
+  payload_file: payloads/json-0034.txt
+  pressure_level: MODERATE
+  scenario_id: json-0034
+  source_type: json
+  split: calibration
+- category: json
+  ground_truth:
+    acceptable_actions:
+    - COMPRESS
+    acceptable_levels:
+    - L1
+    expected_action: COMPRESS
+    expected_level: L1
+    expected_reason_keywords:
+    - null_preservation
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - 'null'
+    - b
+    - c
+    recoverability_required: true
+  input_tokens: 11
+  payload_file: payloads/json-0035.txt
+  pressure_level: MODERATE
+  scenario_id: json-0035
+  source_type: json
+  split: calibration
+- category: json
+  ground_truth:
+    acceptable_actions:
+    - COMPRESS
+    acceptable_levels:
+    - L1
+    expected_action: COMPRESS
+    expected_level: L1
+    expected_reason_keywords:
+    - null_preservation
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - 'null'
+    - b
+    - c
+    recoverability_required: true
+  input_tokens: 11
+  payload_file: payloads/json-0036.txt
+  pressure_level: MODERATE
+  scenario_id: json-0036
+  source_type: json
+  split: calibration
+- category: json
+  ground_truth:
+    acceptable_actions:
+    - KEEP_RAW
+    acceptable_levels:
+    - L0
+    expected_action: KEEP_RAW
+    expected_level: L0
+    expected_reason_keywords:
+    - protected_content
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - token
+    - sk-secret
+    recoverability_required: false
+  input_tokens: 14
+  payload_file: payloads/json-0037.txt
+  pressure_level: HIGH
+  scenario_id: json-0037
+  source_type: json
+  split: calibration
+- category: json
+  ground_truth:
+    acceptable_actions:
+    - KEEP_RAW
+    acceptable_levels:
+    - L0
+    expected_action: KEEP_RAW
+    expected_level: L0
+    expected_reason_keywords:
+    - protected_content
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - token
+    - sk-secret
+    recoverability_required: false
+  input_tokens: 14
+  payload_file: payloads/json-0038.txt
+  pressure_level: HIGH
+  scenario_id: json-0038
+  source_type: json
+  split: calibration
+- category: source_code
+  ground_truth:
+    acceptable_actions:
+    - KEEP_RAW
+    acceptable_levels:
+    - L0
+    expected_action: KEEP_RAW
+    expected_level: L0
+    expected_reason_keywords:
+    - source_code
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - def
+    recoverability_required: false
+  input_tokens: 31
+  payload_file: payloads/sour-0039.txt
+  pressure_level: LOW
+  scenario_id: sour-0039
+  source_type: source_code
+  split: holdout
+- category: source_code
+  ground_truth:
+    acceptable_actions:
+    - KEEP_RAW
+    acceptable_levels:
+    - L0
+    expected_action: KEEP_RAW
+    expected_level: L0
+    expected_reason_keywords:
+    - source_code
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - def
+    - class
+    recoverability_required: false
+  input_tokens: 36
+  payload_file: payloads/sour-0040.txt
+  pressure_level: MODERATE
+  scenario_id: sour-0040
+  source_type: source_code
+  split: holdout
+- category: source_code
+  ground_truth:
+    acceptable_actions:
+    - KEEP_RAW
+    acceptable_levels:
+    - L0
+    expected_action: KEEP_RAW
+    expected_level: L0
+    expected_reason_keywords:
+    - source_code
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - def
+    recoverability_required: false
+  input_tokens: 35
+  payload_file: payloads/sour-0041.txt
+  pressure_level: HIGH
+  scenario_id: sour-0041
+  source_type: source_code
+  split: holdout
+- category: source_code
+  ground_truth:
+    acceptable_actions:
+    - KEEP_RAW
+    acceptable_levels:
+    - L0
+    expected_action: KEEP_RAW
+    expected_level: L0
+    expected_reason_keywords:
+    - source_code
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - fn
+    recoverability_required: false
+  input_tokens: 42
+  payload_file: payloads/sour-0042.txt
+  pressure_level: CRITICAL
+  scenario_id: sour-0042
+  source_type: source_code
+  split: holdout
+- category: source_code
+  ground_truth:
+    acceptable_actions:
+    - KEEP_RAW
+    acceptable_levels:
+    - L0
+    expected_action: KEEP_RAW
+    expected_level: L0
+    expected_reason_keywords:
+    - source_code
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - def
+    - import
+    recoverability_required: false
+  input_tokens: 34
+  payload_file: payloads/sour-0043.txt
+  pressure_level: LOW
+  scenario_id: sour-0043
+  source_type: source_code
+  split: holdout
+- category: source_code
+  ground_truth:
+    acceptable_actions:
+    - KEEP_RAW
+    acceptable_levels:
+    - L0
+    expected_action: KEEP_RAW
+    expected_level: L0
+    expected_reason_keywords:
+    - source_code
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - def
+    recoverability_required: false
+  input_tokens: 31
+  payload_file: payloads/sour-0044.txt
+  pressure_level: MODERATE
+  scenario_id: sour-0044
+  source_type: source_code
+  split: calibration
+- category: source_code
+  ground_truth:
+    acceptable_actions:
+    - KEEP_RAW
+    acceptable_levels:
+    - L0
+    expected_action: KEEP_RAW
+    expected_level: L0
+    expected_reason_keywords:
+    - source_code
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - def
+    - class
+    recoverability_required: false
+  input_tokens: 36
+  payload_file: payloads/sour-0045.txt
+  pressure_level: HIGH
+  scenario_id: sour-0045
+  source_type: source_code
+  split: calibration
+- category: source_code
+  ground_truth:
+    acceptable_actions:
+    - KEEP_RAW
+    acceptable_levels:
+    - L0
+    expected_action: KEEP_RAW
+    expected_level: L0
+    expected_reason_keywords:
+    - source_code
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - def
+    recoverability_required: false
+  input_tokens: 35
+  payload_file: payloads/sour-0046.txt
+  pressure_level: CRITICAL
+  scenario_id: sour-0046
+  source_type: source_code
+  split: calibration
+- category: source_code
+  ground_truth:
+    acceptable_actions:
+    - KEEP_RAW
+    acceptable_levels:
+    - L0
+    expected_action: KEEP_RAW
+    expected_level: L0
+    expected_reason_keywords:
+    - source_code
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - fn
+    recoverability_required: false
+  input_tokens: 42
+  payload_file: payloads/sour-0047.txt
+  pressure_level: LOW
+  scenario_id: sour-0047
+  source_type: source_code
+  split: calibration
+- category: source_code
+  ground_truth:
+    acceptable_actions:
+    - KEEP_RAW
+    acceptable_levels:
+    - L0
+    expected_action: KEEP_RAW
+    expected_level: L0
+    expected_reason_keywords:
+    - source_code
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - def
+    - import
+    recoverability_required: false
+  input_tokens: 34
+  payload_file: payloads/sour-0048.txt
+  pressure_level: MODERATE
+  scenario_id: sour-0048
+  source_type: source_code
+  split: calibration
+- category: source_code
+  ground_truth:
+    acceptable_actions:
+    - KEEP_RAW
+    acceptable_levels:
+    - L0
+    expected_action: KEEP_RAW
+    expected_level: L0
+    expected_reason_keywords:
+    - source_code
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - def
+    recoverability_required: false
+  input_tokens: 31
+  payload_file: payloads/sour-0049.txt
+  pressure_level: HIGH
+  scenario_id: sour-0049
+  source_type: source_code
+  split: calibration
+- category: source_code
+  ground_truth:
+    acceptable_actions:
+    - KEEP_RAW
+    acceptable_levels:
+    - L0
+    expected_action: KEEP_RAW
+    expected_level: L0
+    expected_reason_keywords:
+    - source_code
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - def
+    - class
+    recoverability_required: false
+  input_tokens: 36
+  payload_file: payloads/sour-0050.txt
+  pressure_level: CRITICAL
+  scenario_id: sour-0050
+  source_type: source_code
+  split: calibration
+- category: source_code
+  ground_truth:
+    acceptable_actions:
+    - KEEP_RAW
+    acceptable_levels:
+    - L0
+    expected_action: KEEP_RAW
+    expected_level: L0
+    expected_reason_keywords:
+    - source_code
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - def
+    recoverability_required: false
+  input_tokens: 35
+  payload_file: payloads/sour-0051.txt
+  pressure_level: LOW
+  scenario_id: sour-0051
+  source_type: source_code
+  split: calibration
+- category: source_code
+  ground_truth:
+    acceptable_actions:
+    - KEEP_RAW
+    acceptable_levels:
+    - L0
+    expected_action: KEEP_RAW
+    expected_level: L0
+    expected_reason_keywords:
+    - source_code
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - fn
+    recoverability_required: false
+  input_tokens: 42
+  payload_file: payloads/sour-0052.txt
+  pressure_level: MODERATE
+  scenario_id: sour-0052
+  source_type: source_code
+  split: calibration
+- category: source_code
+  ground_truth:
+    acceptable_actions:
+    - KEEP_RAW
+    acceptable_levels:
+    - L0
+    expected_action: KEEP_RAW
+    expected_level: L0
+    expected_reason_keywords:
+    - source_code
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - def
+    - import
+    recoverability_required: false
+  input_tokens: 34
+  payload_file: payloads/sour-0053.txt
+  pressure_level: HIGH
+  scenario_id: sour-0053
+  source_type: source_code
+  split: calibration
+- category: source_code
+  ground_truth:
+    acceptable_actions:
+    - KEEP_RAW
+    acceptable_levels:
+    - L0
+    expected_action: KEEP_RAW
+    expected_level: L0
+    expected_reason_keywords:
+    - source_code
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - def
+    recoverability_required: false
+  input_tokens: 31
+  payload_file: payloads/sour-0054.txt
+  pressure_level: CRITICAL
+  scenario_id: sour-0054
+  source_type: source_code
+  split: calibration
+- category: source_code
+  ground_truth:
+    acceptable_actions:
+    - KEEP_RAW
+    acceptable_levels:
+    - L0
+    expected_action: KEEP_RAW
+    expected_level: L0
+    expected_reason_keywords:
+    - source_code
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - def
+    - class
+    recoverability_required: false
+  input_tokens: 36
+  payload_file: payloads/sour-0055.txt
+  pressure_level: LOW
+  scenario_id: sour-0055
+  source_type: source_code
+  split: calibration
+- category: source_code
+  ground_truth:
+    acceptable_actions:
+    - KEEP_RAW
+    acceptable_levels:
+    - L0
+    expected_action: KEEP_RAW
+    expected_level: L0
+    expected_reason_keywords:
+    - source_code
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - def
+    recoverability_required: false
+  input_tokens: 35
+  payload_file: payloads/sour-0056.txt
+  pressure_level: MODERATE
+  scenario_id: sour-0056
+  source_type: source_code
+  split: calibration
+- category: source_code
+  ground_truth:
+    acceptable_actions:
+    - KEEP_RAW
+    acceptable_levels:
+    - L0
+    expected_action: KEEP_RAW
+    expected_level: L0
+    expected_reason_keywords:
+    - source_code
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - fn
+    recoverability_required: false
+  input_tokens: 42
+  payload_file: payloads/sour-0057.txt
+  pressure_level: HIGH
+  scenario_id: sour-0057
+  source_type: source_code
+  split: calibration
+- category: source_code
+  ground_truth:
+    acceptable_actions:
+    - KEEP_RAW
+    acceptable_levels:
+    - L0
+    expected_action: KEEP_RAW
+    expected_level: L0
+    expected_reason_keywords:
+    - source_code
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - def
+    - import
+    recoverability_required: false
+  input_tokens: 34
+  payload_file: payloads/sour-0058.txt
+  pressure_level: CRITICAL
+  scenario_id: sour-0058
+  source_type: source_code
+  split: calibration
+- category: tracebacks
+  ground_truth:
+    acceptable_actions:
+    - KEEP_RAW
+    acceptable_levels:
+    - L0
+    expected_action: KEEP_RAW
+    expected_level: L0
+    expected_reason_keywords:
+    - critical_error
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - Traceback
+    - DatabaseError
+    - connection lost
+    - line 42
+    recoverability_required: false
+  input_tokens: 70
+  payload_file: payloads/trac-0059.txt
+  pressure_level: LOW
+  scenario_id: trac-0059
+  source_type: log
+  split: calibration
+- category: tracebacks
+  ground_truth:
+    acceptable_actions:
+    - KEEP_RAW
+    acceptable_levels:
+    - L0
+    expected_action: KEEP_RAW
+    expected_level: L0
+    expected_reason_keywords:
+    - critical_error
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - Traceback
+    - DatabaseError
+    - connection lost
+    - line 43
+    recoverability_required: false
+  input_tokens: 70
+  payload_file: payloads/trac-0060.txt
+  pressure_level: LOW
+  scenario_id: trac-0060
+  source_type: log
+  split: calibration
+- category: tracebacks
+  ground_truth:
+    acceptable_actions:
+    - KEEP_RAW
+    acceptable_levels:
+    - L0
+    expected_action: KEEP_RAW
+    expected_level: L0
+    expected_reason_keywords:
+    - critical_error
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - Traceback
+    - DatabaseError
+    - connection lost
+    - line 44
+    recoverability_required: false
+  input_tokens: 70
+  payload_file: payloads/trac-0061.txt
+  pressure_level: LOW
+  scenario_id: trac-0061
+  source_type: log
+  split: holdout
+- category: tracebacks
+  ground_truth:
+    acceptable_actions:
+    - KEEP_RAW
+    acceptable_levels:
+    - L0
+    expected_action: KEEP_RAW
+    expected_level: L0
+    expected_reason_keywords:
+    - critical_error
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - Traceback
+    - DatabaseError
+    - connection lost
+    - line 45
+    recoverability_required: false
+  input_tokens: 70
+  payload_file: payloads/trac-0062.txt
+  pressure_level: LOW
+  scenario_id: trac-0062
+  source_type: log
+  split: calibration
+- category: tracebacks
+  ground_truth:
+    acceptable_actions:
+    - KEEP_RAW
+    acceptable_levels:
+    - L0
+    expected_action: KEEP_RAW
+    expected_level: L0
+    expected_reason_keywords:
+    - critical_error
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - Traceback
+    - DatabaseError
+    - connection lost
+    - line 46
+    recoverability_required: false
+  input_tokens: 70
+  payload_file: payloads/trac-0063.txt
+  pressure_level: LOW
+  scenario_id: trac-0063
+  source_type: log
+  split: calibration
+- category: tracebacks
+  ground_truth:
+    acceptable_actions:
+    - KEEP_RAW
+    acceptable_levels:
+    - L0
+    expected_action: KEEP_RAW
+    expected_level: L0
+    expected_reason_keywords:
+    - critical_error
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - Traceback
+    - DatabaseError
+    - connection lost
+    - line 47
+    recoverability_required: false
+  input_tokens: 70
+  payload_file: payloads/trac-0064.txt
+  pressure_level: LOW
+  scenario_id: trac-0064
+  source_type: log
+  split: holdout
+- category: tracebacks
+  ground_truth:
+    acceptable_actions:
+    - KEEP_RAW
+    acceptable_levels:
+    - L0
+    expected_action: KEEP_RAW
+    expected_level: L0
+    expected_reason_keywords:
+    - critical_error
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - Traceback
+    - DatabaseError
+    - connection lost
+    - line 48
+    recoverability_required: false
+  input_tokens: 70
+  payload_file: payloads/trac-0065.txt
+  pressure_level: LOW
+  scenario_id: trac-0065
+  source_type: log
+  split: holdout
+- category: tracebacks
+  ground_truth:
+    acceptable_actions:
+    - KEEP_RAW
+    acceptable_levels:
+    - L0
+    expected_action: KEEP_RAW
+    expected_level: L0
+    expected_reason_keywords:
+    - critical_error
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - Traceback
+    - DatabaseError
+    - connection lost
+    - line 49
+    recoverability_required: false
+  input_tokens: 70
+  payload_file: payloads/trac-0066.txt
+  pressure_level: LOW
+  scenario_id: trac-0066
+  source_type: log
+  split: holdout
+- category: tracebacks
+  ground_truth:
+    acceptable_actions:
+    - KEEP_RAW
+    acceptable_levels:
+    - L0
+    expected_action: KEEP_RAW
+    expected_level: L0
+    expected_reason_keywords:
+    - critical_error
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - Traceback
+    - DatabaseError
+    - connection lost
+    - line 50
+    recoverability_required: false
+  input_tokens: 70
+  payload_file: payloads/trac-0067.txt
+  pressure_level: LOW
+  scenario_id: trac-0067
+  source_type: log
+  split: calibration
+- category: tracebacks
+  ground_truth:
+    acceptable_actions:
+    - KEEP_RAW
+    acceptable_levels:
+    - L0
+    expected_action: KEEP_RAW
+    expected_level: L0
+    expected_reason_keywords:
+    - critical_error
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - Traceback
+    - DatabaseError
+    - connection lost
+    - line 51
+    recoverability_required: false
+  input_tokens: 70
+  payload_file: payloads/trac-0068.txt
+  pressure_level: LOW
+  scenario_id: trac-0068
+  source_type: log
+  split: calibration
+- category: tracebacks
+  ground_truth:
+    acceptable_actions:
+    - COMPRESS_AGGRESSIVE
+    acceptable_levels:
+    - L3
+    expected_action: COMPRESS_AGGRESSIVE
+    expected_level: L3
+    expected_reason_keywords:
+    - emergency
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - 'ERROR: OOM'
+    - worker-0
+    - Memory
+    recoverability_required: false
+  input_tokens: 305
+  payload_file: payloads/trac-0069.txt
+  pressure_level: EMERGENCY
+  scenario_id: trac-0069
+  source_type: log
+  split: calibration
+- category: tracebacks
+  ground_truth:
+    acceptable_actions:
+    - COMPRESS_AGGRESSIVE
+    acceptable_levels:
+    - L3
+    expected_action: COMPRESS_AGGRESSIVE
+    expected_level: L3
+    expected_reason_keywords:
+    - emergency
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - 'ERROR: OOM'
+    - worker-1
+    - Memory
+    recoverability_required: false
+  input_tokens: 305
+  payload_file: payloads/trac-0070.txt
+  pressure_level: EMERGENCY
+  scenario_id: trac-0070
+  source_type: log
+  split: holdout
+- category: tracebacks
+  ground_truth:
+    acceptable_actions:
+    - COMPRESS_AGGRESSIVE
+    acceptable_levels:
+    - L3
+    expected_action: COMPRESS_AGGRESSIVE
+    expected_level: L3
+    expected_reason_keywords:
+    - emergency
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - 'ERROR: OOM'
+    - worker-2
+    - Memory
+    recoverability_required: false
+  input_tokens: 305
+  payload_file: payloads/trac-0071.txt
+  pressure_level: EMERGENCY
+  scenario_id: trac-0071
+  source_type: log
+  split: calibration
+- category: tracebacks
+  ground_truth:
+    acceptable_actions:
+    - COMPRESS_AGGRESSIVE
+    acceptable_levels:
+    - L3
+    expected_action: COMPRESS_AGGRESSIVE
+    expected_level: L3
+    expected_reason_keywords:
+    - emergency
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - 'ERROR: OOM'
+    - worker-3
+    - Memory
+    recoverability_required: false
+  input_tokens: 305
+  payload_file: payloads/trac-0072.txt
+  pressure_level: EMERGENCY
+  scenario_id: trac-0072
+  source_type: log
+  split: holdout
+- category: tracebacks
+  ground_truth:
+    acceptable_actions:
+    - COMPRESS_AGGRESSIVE
+    acceptable_levels:
+    - L3
+    expected_action: COMPRESS_AGGRESSIVE
+    expected_level: L3
+    expected_reason_keywords:
+    - emergency
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - 'ERROR: OOM'
+    - worker-4
+    - Memory
+    recoverability_required: false
+  input_tokens: 305
+  payload_file: payloads/trac-0073.txt
+  pressure_level: EMERGENCY
+  scenario_id: trac-0073
+  source_type: log
+  split: calibration
+- category: conversation
+  ground_truth:
+    acceptable_actions:
+    - KEEP_RAW
+    acceptable_levels:
+    - L0
+    expected_action: KEEP_RAW
+    expected_level: L0
+    expected_reason_keywords:
+    - conversation
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - deployment
+    recoverability_required: false
+  input_tokens: 188
+  payload_file: payloads/conv-0074.txt
+  pressure_level: LOW
+  scenario_id: conv-0074
+  source_type: log
+  split: calibration
+- category: conversation
+  ground_truth:
+    acceptable_actions:
+    - COMPRESS
+    acceptable_levels:
+    - L1
+    expected_action: COMPRESS
+    expected_level: L1
+    expected_reason_keywords:
+    - conversation
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - 'commit:'
+    recoverability_required: true
+  input_tokens: 185
+  payload_file: payloads/conv-0075.txt
+  pressure_level: MODERATE
+  scenario_id: conv-0075
+  source_type: log
+  split: calibration
+- category: conversation
+  ground_truth:
+    acceptable_actions:
+    - COMPRESS
+    acceptable_levels:
+    - L1
+    expected_action: COMPRESS
+    expected_level: L1
+    expected_reason_keywords:
+    - conversation
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - host=
+    - config.yaml
+    recoverability_required: true
+  input_tokens: 180
+  payload_file: payloads/conv-0076.txt
+  pressure_level: HIGH
+  scenario_id: conv-0076
+  source_type: log
+  split: calibration
+- category: conversation
+  ground_truth:
+    acceptable_actions:
+    - KEEP_RAW
+    acceptable_levels:
+    - L0
+    expected_action: KEEP_RAW
+    expected_level: L0
+    expected_reason_keywords:
+    - conversation
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - deployment
+    recoverability_required: false
+  input_tokens: 188
+  payload_file: payloads/conv-0077.txt
+  pressure_level: LOW
+  scenario_id: conv-0077
+  source_type: log
+  split: calibration
+- category: conversation
+  ground_truth:
+    acceptable_actions:
+    - COMPRESS
+    acceptable_levels:
+    - L1
+    expected_action: COMPRESS
+    expected_level: L1
+    expected_reason_keywords:
+    - conversation
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - 'commit:'
+    recoverability_required: true
+  input_tokens: 185
+  payload_file: payloads/conv-0078.txt
+  pressure_level: MODERATE
+  scenario_id: conv-0078
+  source_type: log
+  split: calibration
+- category: conversation
+  ground_truth:
+    acceptable_actions:
+    - COMPRESS
+    acceptable_levels:
+    - L1
+    expected_action: COMPRESS
+    expected_level: L1
+    expected_reason_keywords:
+    - conversation
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - host=
+    - config.yaml
+    recoverability_required: true
+  input_tokens: 180
+  payload_file: payloads/conv-0079.txt
+  pressure_level: HIGH
+  scenario_id: conv-0079
+  source_type: log
+  split: holdout
+- category: conversation
+  ground_truth:
+    acceptable_actions:
+    - KEEP_RAW
+    acceptable_levels:
+    - L0
+    expected_action: KEEP_RAW
+    expected_level: L0
+    expected_reason_keywords:
+    - conversation
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - deployment
+    recoverability_required: false
+  input_tokens: 188
+  payload_file: payloads/conv-0080.txt
+  pressure_level: LOW
+  scenario_id: conv-0080
+  source_type: log
+  split: calibration
+- category: conversation
+  ground_truth:
+    acceptable_actions:
+    - COMPRESS
+    acceptable_levels:
+    - L1
+    expected_action: COMPRESS
+    expected_level: L1
+    expected_reason_keywords:
+    - conversation
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - 'commit:'
+    recoverability_required: true
+  input_tokens: 185
+  payload_file: payloads/conv-0081.txt
+  pressure_level: MODERATE
+  scenario_id: conv-0081
+  source_type: log
+  split: calibration
+- category: conversation
+  ground_truth:
+    acceptable_actions:
+    - COMPRESS
+    acceptable_levels:
+    - L1
+    expected_action: COMPRESS
+    expected_level: L1
+    expected_reason_keywords:
+    - conversation
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - host=
+    - config.yaml
+    recoverability_required: true
+  input_tokens: 180
+  payload_file: payloads/conv-0082.txt
+  pressure_level: HIGH
+  scenario_id: conv-0082
+  source_type: log
+  split: holdout
+- category: conversation
+  ground_truth:
+    acceptable_actions:
+    - KEEP_RAW
+    acceptable_levels:
+    - L0
+    expected_action: KEEP_RAW
+    expected_level: L0
+    expected_reason_keywords:
+    - conversation
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - deployment
+    recoverability_required: false
+  input_tokens: 188
+  payload_file: payloads/conv-0083.txt
+  pressure_level: LOW
+  scenario_id: conv-0083
+  source_type: log
+  split: holdout
+- category: conversation
+  ground_truth:
+    acceptable_actions:
+    - COMPRESS
+    acceptable_levels:
+    - L2
+    expected_action: COMPRESS
+    expected_level: L2
+    expected_reason_keywords:
+    - compress
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - API key
+    - sk-1234567890abcdef
+    recoverability_required: true
+  input_tokens: 401
+  payload_file: payloads/conv-0084.txt
+  pressure_level: HIGH
+  scenario_id: conv-0084
+  source_type: log
+  split: holdout
+- category: conversation
+  ground_truth:
+    acceptable_actions:
+    - COMPRESS
+    acceptable_levels:
+    - L2
+    expected_action: COMPRESS
+    expected_level: L2
+    expected_reason_keywords:
+    - compress
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - API key
+    - sk-1234567890abcdef
+    recoverability_required: true
+  input_tokens: 401
+  payload_file: payloads/conv-0085.txt
+  pressure_level: CRITICAL
+  scenario_id: conv-0085
+  source_type: log
+  split: calibration
+- category: conversation
+  ground_truth:
+    acceptable_actions:
+    - COMPRESS
+    acceptable_levels:
+    - L2
+    expected_action: COMPRESS
+    expected_level: L2
+    expected_reason_keywords:
+    - compress
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - API key
+    - sk-1234567890abcdef
+    recoverability_required: true
+  input_tokens: 401
+  payload_file: payloads/conv-0086.txt
+  pressure_level: HIGH
+  scenario_id: conv-0086
+  source_type: log
+  split: calibration
+- category: conversation
+  ground_truth:
+    acceptable_actions:
+    - COMPRESS
+    acceptable_levels:
+    - L2
+    expected_action: COMPRESS
+    expected_level: L2
+    expected_reason_keywords:
+    - compress
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - API key
+    - sk-1234567890abcdef
+    recoverability_required: true
+  input_tokens: 401
+  payload_file: payloads/conv-0087.txt
+  pressure_level: CRITICAL
+  scenario_id: conv-0087
+  source_type: log
+  split: holdout
+- category: conversation
+  ground_truth:
+    acceptable_actions:
+    - COMPRESS
+    acceptable_levels:
+    - L2
+    expected_action: COMPRESS
+    expected_level: L2
+    expected_reason_keywords:
+    - compress
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - API key
+    - sk-1234567890abcdef
+    recoverability_required: true
+  input_tokens: 401
+  payload_file: payloads/conv-0088.txt
+  pressure_level: HIGH
+  scenario_id: conv-0088
+  source_type: log
+  split: holdout
+- category: conversation
+  ground_truth:
+    acceptable_actions:
+    - COMPRESS
+    acceptable_levels:
+    - L2
+    expected_action: COMPRESS
+    expected_level: L2
+    expected_reason_keywords:
+    - compress
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - API key
+    - sk-1234567890abcdef
+    recoverability_required: true
+  input_tokens: 401
+  payload_file: payloads/conv-0089.txt
+  pressure_level: CRITICAL
+  scenario_id: conv-0089
+  source_type: log
+  split: holdout
+- category: conversation
+  ground_truth:
+    acceptable_actions:
+    - COMPRESS
+    acceptable_levels:
+    - L2
+    expected_action: COMPRESS
+    expected_level: L2
+    expected_reason_keywords:
+    - compress
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - API key
+    - sk-1234567890abcdef
+    recoverability_required: true
+  input_tokens: 401
+  payload_file: payloads/conv-0090.txt
+  pressure_level: HIGH
+  scenario_id: conv-0090
+  source_type: log
+  split: calibration
+- category: conversation
+  ground_truth:
+    acceptable_actions:
+    - COMPRESS
+    acceptable_levels:
+    - L2
+    expected_action: COMPRESS
+    expected_level: L2
+    expected_reason_keywords:
+    - compress
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - API key
+    - sk-1234567890abcdef
+    recoverability_required: true
+  input_tokens: 401
+  payload_file: payloads/conv-0091.txt
+  pressure_level: CRITICAL
+  scenario_id: conv-0091
+  source_type: log
+  split: holdout
+- category: conversation
+  ground_truth:
+    acceptable_actions:
+    - COMPRESS
+    acceptable_levels:
+    - L2
+    expected_action: COMPRESS
+    expected_level: L2
+    expected_reason_keywords:
+    - compress
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - API key
+    - sk-1234567890abcdef
+    recoverability_required: true
+  input_tokens: 401
+  payload_file: payloads/conv-0092.txt
+  pressure_level: HIGH
+  scenario_id: conv-0092
+  source_type: log
+  split: calibration
+- category: conversation
+  ground_truth:
+    acceptable_actions:
+    - COMPRESS
+    acceptable_levels:
+    - L2
+    expected_action: COMPRESS
+    expected_level: L2
+    expected_reason_keywords:
+    - compress
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - API key
+    - sk-1234567890abcdef
+    recoverability_required: true
+  input_tokens: 401
+  payload_file: payloads/conv-0093.txt
+  pressure_level: CRITICAL
+  scenario_id: conv-0093
+  source_type: log
+  split: holdout
+- category: configs
+  ground_truth:
+    acceptable_actions:
+    - KEEP_RAW
+    acceptable_levels:
+    - L0
+    expected_action: KEEP_RAW
+    expected_level: L0
+    expected_reason_keywords:
+    - config_file
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - 'host:'
+    - 'port: 5432'
+    - password
+    recoverability_required: false
+  input_tokens: 44
+  payload_file: payloads/conf-0094.txt
+  pressure_level: LOW
+  scenario_id: conf-0094
+  source_type: config
+  split: calibration
+- category: configs
+  ground_truth:
+    acceptable_actions:
+    - KEEP_RAW
+    acceptable_levels:
+    - L0
+    expected_action: KEEP_RAW
+    expected_level: L0
+    expected_reason_keywords:
+    - config_file
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - 'host:'
+    - 'port: 5433'
+    - password
+    recoverability_required: false
+  input_tokens: 44
+  payload_file: payloads/conf-0095.txt
+  pressure_level: LOW
+  scenario_id: conf-0095
+  source_type: config
+  split: calibration
+- category: configs
+  ground_truth:
+    acceptable_actions:
+    - KEEP_RAW
+    acceptable_levels:
+    - L0
+    expected_action: KEEP_RAW
+    expected_level: L0
+    expected_reason_keywords:
+    - config_file
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - 'host:'
+    - 'port: 5434'
+    - password
+    recoverability_required: false
+  input_tokens: 44
+  payload_file: payloads/conf-0096.txt
+  pressure_level: LOW
+  scenario_id: conf-0096
+  source_type: config
+  split: holdout
+- category: configs
+  ground_truth:
+    acceptable_actions:
+    - KEEP_RAW
+    acceptable_levels:
+    - L0
+    expected_action: KEEP_RAW
+    expected_level: L0
+    expected_reason_keywords:
+    - config_file
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - 'host:'
+    - 'port: 5435'
+    - password
+    recoverability_required: false
+  input_tokens: 44
+  payload_file: payloads/conf-0097.txt
+  pressure_level: LOW
+  scenario_id: conf-0097
+  source_type: config
+  split: calibration
+- category: configs
+  ground_truth:
+    acceptable_actions:
+    - KEEP_RAW
+    acceptable_levels:
+    - L0
+    expected_action: KEEP_RAW
+    expected_level: L0
+    expected_reason_keywords:
+    - config_file
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - 'host:'
+    - 'port: 5436'
+    - password
+    recoverability_required: false
+  input_tokens: 44
+  payload_file: payloads/conf-0098.txt
+  pressure_level: LOW
+  scenario_id: conf-0098
+  source_type: config
+  split: calibration
+- category: configs
+  ground_truth:
+    acceptable_actions:
+    - KEEP_RAW
+    acceptable_levels:
+    - L0
+    expected_action: KEEP_RAW
+    expected_level: L0
+    expected_reason_keywords:
+    - config_file
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - 'host:'
+    - 'port: 5437'
+    - password
+    recoverability_required: false
+  input_tokens: 44
+  payload_file: payloads/conf-0099.txt
+  pressure_level: LOW
+  scenario_id: conf-0099
+  source_type: config
+  split: holdout
+- category: configs
+  ground_truth:
+    acceptable_actions:
+    - KEEP_RAW
+    acceptable_levels:
+    - L0
+    expected_action: KEEP_RAW
+    expected_level: L0
+    expected_reason_keywords:
+    - config_file
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - 'host:'
+    - 'port: 5438'
+    - password
+    recoverability_required: false
+  input_tokens: 44
+  payload_file: payloads/conf-0100.txt
+  pressure_level: LOW
+  scenario_id: conf-0100
+  source_type: config
+  split: calibration
+- category: configs
+  ground_truth:
+    acceptable_actions:
+    - KEEP_RAW
+    acceptable_levels:
+    - L0
+    expected_action: KEEP_RAW
+    expected_level: L0
+    expected_reason_keywords:
+    - config_file
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - 'host:'
+    - 'port: 5439'
+    - password
+    recoverability_required: false
+  input_tokens: 44
+  payload_file: payloads/conf-0101.txt
+  pressure_level: LOW
+  scenario_id: conf-0101
+  source_type: config
+  split: calibration
+- category: configs
+  ground_truth:
+    acceptable_actions:
+    - KEEP_RAW
+    acceptable_levels:
+    - L0
+    expected_action: KEEP_RAW
+    expected_level: L0
+    expected_reason_keywords:
+    - config_file
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - 'host:'
+    - 'port: 5440'
+    - password
+    recoverability_required: false
+  input_tokens: 44
+  payload_file: payloads/conf-0102.txt
+  pressure_level: LOW
+  scenario_id: conf-0102
+  source_type: config
+  split: calibration
+- category: configs
+  ground_truth:
+    acceptable_actions:
+    - KEEP_RAW
+    acceptable_levels:
+    - L0
+    expected_action: KEEP_RAW
+    expected_level: L0
+    expected_reason_keywords:
+    - config_file
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - 'host:'
+    - 'port: 5441'
+    - password
+    recoverability_required: false
+  input_tokens: 44
+  payload_file: payloads/conf-0103.txt
+  pressure_level: LOW
+  scenario_id: conf-0103
+  source_type: config
+  split: calibration
+- category: repeated_noise
+  ground_truth:
+    acceptable_actions:
+    - COMPRESS_AGGRESSIVE
+    acceptable_levels:
+    - L1
+    expected_action: COMPRESS_AGGRESSIVE
+    expected_level: L1
+    expected_reason_keywords:
+    - repetitive
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields: []
+    recoverability_required: true
+  input_tokens: 533
+  payload_file: payloads/repe-0104.txt
+  pressure_level: MODERATE
+  scenario_id: repe-0104
+  source_type: log
+  split: calibration
+- category: repeated_noise
+  ground_truth:
+    acceptable_actions:
+    - COMPRESS
+    acceptable_levels:
+    - L2
+    expected_action: COMPRESS
+    expected_level: L2
+    expected_reason_keywords:
+    - repetitive
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields: []
+    recoverability_required: true
+  input_tokens: 533
+  payload_file: payloads/repe-0105.txt
+  pressure_level: HIGH
+  scenario_id: repe-0105
+  source_type: log
+  split: holdout
+- category: repeated_noise
+  ground_truth:
+    acceptable_actions:
+    - COMPRESS
+    acceptable_levels:
+    - L2
+    expected_action: COMPRESS_AGGRESSIVE
+    expected_level: L2
+    expected_reason_keywords:
+    - repetitive
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields: []
+    recoverability_required: true
+  input_tokens: 533
+  payload_file: payloads/repe-0106.txt
+  pressure_level: CRITICAL
+  scenario_id: repe-0106
+  source_type: log
+  split: holdout
+- category: repeated_noise
+  ground_truth:
+    acceptable_actions:
+    - COMPRESS
+    acceptable_levels:
+    - L2
+    expected_action: COMPRESS_AGGRESSIVE
+    expected_level: L2
+    expected_reason_keywords:
+    - repetitive
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields: []
+    recoverability_required: true
+  input_tokens: 533
+  payload_file: payloads/repe-0107.txt
+  pressure_level: EMERGENCY
+  scenario_id: repe-0107
+  source_type: log
+  split: calibration
+- category: repeated_noise
+  ground_truth:
+    acceptable_actions:
+    - COMPRESS_AGGRESSIVE
+    acceptable_levels:
+    - L1
+    expected_action: COMPRESS_AGGRESSIVE
+    expected_level: L1
+    expected_reason_keywords:
+    - repetitive
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields: []
+    recoverability_required: true
+  input_tokens: 533
+  payload_file: payloads/repe-0108.txt
+  pressure_level: MODERATE
+  scenario_id: repe-0108
+  source_type: log
+  split: calibration
+- category: repeated_noise
+  ground_truth:
+    acceptable_actions:
+    - COMPRESS
+    acceptable_levels:
+    - L2
+    expected_action: COMPRESS
+    expected_level: L2
+    expected_reason_keywords:
+    - repetitive
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields: []
+    recoverability_required: true
+  input_tokens: 533
+  payload_file: payloads/repe-0109.txt
+  pressure_level: HIGH
+  scenario_id: repe-0109
+  source_type: log
+  split: calibration
+- category: repeated_noise
+  ground_truth:
+    acceptable_actions:
+    - COMPRESS
+    acceptable_levels:
+    - L2
+    expected_action: COMPRESS_AGGRESSIVE
+    expected_level: L2
+    expected_reason_keywords:
+    - repetitive
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields: []
+    recoverability_required: true
+  input_tokens: 533
+  payload_file: payloads/repe-0110.txt
+  pressure_level: CRITICAL
+  scenario_id: repe-0110
+  source_type: log
+  split: holdout
+- category: repeated_noise
+  ground_truth:
+    acceptable_actions:
+    - COMPRESS
+    acceptable_levels:
+    - L2
+    expected_action: COMPRESS_AGGRESSIVE
+    expected_level: L2
+    expected_reason_keywords:
+    - repetitive
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields: []
+    recoverability_required: true
+  input_tokens: 533
+  payload_file: payloads/repe-0111.txt
+  pressure_level: EMERGENCY
+  scenario_id: repe-0111
+  source_type: log
+  split: calibration
+- category: repeated_noise
+  ground_truth:
+    acceptable_actions:
+    - COMPRESS_AGGRESSIVE
+    acceptable_levels:
+    - L1
+    expected_action: COMPRESS_AGGRESSIVE
+    expected_level: L1
+    expected_reason_keywords:
+    - repetitive
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields: []
+    recoverability_required: true
+  input_tokens: 533
+  payload_file: payloads/repe-0112.txt
+  pressure_level: MODERATE
+  scenario_id: repe-0112
+  source_type: log
+  split: calibration
+- category: repeated_noise
+  ground_truth:
+    acceptable_actions:
+    - COMPRESS
+    acceptable_levels:
+    - L2
+    expected_action: COMPRESS
+    expected_level: L2
+    expected_reason_keywords:
+    - repetitive
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields: []
+    recoverability_required: true
+  input_tokens: 533
+  payload_file: payloads/repe-0113.txt
+  pressure_level: HIGH
+  scenario_id: repe-0113
+  source_type: log
+  split: calibration
+- category: large_payloads
+  ground_truth:
+    acceptable_actions:
+    - COMPRESS_AGGRESSIVE
+    acceptable_levels:
+    - L2
+    expected_action: COMPRESS_AGGRESSIVE
+    expected_level: L2
+    expected_reason_keywords:
+    - large
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields: []
+    recoverability_required: true
+  input_tokens: 7354
+  payload_file: payloads/larg-0114.txt
+  pressure_level: HIGH
+  scenario_id: larg-0114
+  source_type: log
+  split: holdout
+- category: large_payloads
+  ground_truth:
+    acceptable_actions:
+    - COMPRESS_AGGRESSIVE
+    acceptable_levels:
+    - L2
+    expected_action: COMPRESS_AGGRESSIVE
+    expected_level: L2
+    expected_reason_keywords:
+    - large
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields: []
+    recoverability_required: true
+  input_tokens: 7354
+  payload_file: payloads/larg-0115.txt
+  pressure_level: CRITICAL
+  scenario_id: larg-0115
+  source_type: log
+  split: calibration
+- category: large_payloads
+  ground_truth:
+    acceptable_actions:
+    - EXTERNALIZE
+    acceptable_levels:
+    - L3
+    expected_action: EXTERNALIZE
+    expected_level: L3
+    expected_reason_keywords:
+    - large
+    externalization_allowed: true
+    forbidden_losses: []
+    protected_fields: []
+    recoverability_required: false
+  input_tokens: 7354
+  payload_file: payloads/larg-0116.txt
+  pressure_level: EMERGENCY
+  scenario_id: larg-0116
+  source_type: log
+  split: calibration
+- category: large_payloads
+  ground_truth:
+    acceptable_actions:
+    - COMPRESS_AGGRESSIVE
+    acceptable_levels:
+    - L2
+    expected_action: COMPRESS_AGGRESSIVE
+    expected_level: L2
+    expected_reason_keywords:
+    - large
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields: []
+    recoverability_required: true
+  input_tokens: 7354
+  payload_file: payloads/larg-0117.txt
+  pressure_level: HIGH
+  scenario_id: larg-0117
+  source_type: log
+  split: calibration
+- category: large_payloads
+  ground_truth:
+    acceptable_actions:
+    - COMPRESS_AGGRESSIVE
+    acceptable_levels:
+    - L2
+    expected_action: COMPRESS_AGGRESSIVE
+    expected_level: L2
+    expected_reason_keywords:
+    - large
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields: []
+    recoverability_required: true
+  input_tokens: 7354
+  payload_file: payloads/larg-0118.txt
+  pressure_level: CRITICAL
+  scenario_id: larg-0118
+  source_type: log
+  split: holdout
+- category: large_payloads
+  ground_truth:
+    acceptable_actions:
+    - EXTERNALIZE
+    acceptable_levels:
+    - L3
+    expected_action: EXTERNALIZE
+    expected_level: L3
+    expected_reason_keywords:
+    - large
+    externalization_allowed: true
+    forbidden_losses: []
+    protected_fields: []
+    recoverability_required: false
+  input_tokens: 7354
+  payload_file: payloads/larg-0119.txt
+  pressure_level: EMERGENCY
+  scenario_id: larg-0119
+  source_type: log
+  split: holdout
+- category: large_payloads
+  ground_truth:
+    acceptable_actions:
+    - COMPRESS_AGGRESSIVE
+    acceptable_levels:
+    - L2
+    expected_action: COMPRESS_AGGRESSIVE
+    expected_level: L2
+    expected_reason_keywords:
+    - large
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields: []
+    recoverability_required: true
+  input_tokens: 7354
+  payload_file: payloads/larg-0120.txt
+  pressure_level: HIGH
+  scenario_id: larg-0120
+  source_type: log
+  split: calibration
+- category: large_payloads
+  ground_truth:
+    acceptable_actions:
+    - COMPRESS_AGGRESSIVE
+    acceptable_levels:
+    - L2
+    expected_action: COMPRESS_AGGRESSIVE
+    expected_level: L2
+    expected_reason_keywords:
+    - large
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields: []
+    recoverability_required: true
+  input_tokens: 7354
+  payload_file: payloads/larg-0121.txt
+  pressure_level: CRITICAL
+  scenario_id: larg-0121
+  source_type: log
+  split: holdout
+- category: large_payloads
+  ground_truth:
+    acceptable_actions:
+    - EXTERNALIZE
+    acceptable_levels:
+    - L3
+    expected_action: EXTERNALIZE
+    expected_level: L3
+    expected_reason_keywords:
+    - large
+    externalization_allowed: true
+    forbidden_losses: []
+    protected_fields: []
+    recoverability_required: false
+  input_tokens: 7354
+  payload_file: payloads/larg-0122.txt
+  pressure_level: EMERGENCY
+  scenario_id: larg-0122
+  source_type: log
+  split: calibration
+- category: large_payloads
+  ground_truth:
+    acceptable_actions:
+    - COMPRESS_AGGRESSIVE
+    acceptable_levels:
+    - L2
+    expected_action: COMPRESS_AGGRESSIVE
+    expected_level: L2
+    expected_reason_keywords:
+    - large
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields: []
+    recoverability_required: true
+  input_tokens: 7354
+  payload_file: payloads/larg-0123.txt
+  pressure_level: HIGH
+  scenario_id: larg-0123
+  source_type: log
+  split: holdout
+- category: mixed_critical
+  ground_truth:
+    acceptable_actions:
+    - KEEP_RAW
+    acceptable_levels:
+    - L0
+    expected_action: KEEP_RAW
+    expected_level: L0
+    expected_reason_keywords:
+    - protected_content
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - 'ERROR: database failure'
+    - CVE-2026-0000
+    - port 5432
+    recoverability_required: true
+  input_tokens: 199
+  payload_file: payloads/mixe-0124.txt
+  pressure_level: HIGH
+  scenario_id: mixe-0124
+  source_type: log
+  split: calibration
+- category: mixed_critical
+  ground_truth:
+    acceptable_actions:
+    - COMPRESS_AGGRESSIVE
+    acceptable_levels:
+    - L3
+    expected_action: COMPRESS_AGGRESSIVE
+    expected_level: L3
+    expected_reason_keywords:
+    - mixed
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - 'ERROR: database failure'
+    - CVE-2026-0001
+    - port 5433
+    recoverability_required: false
+  input_tokens: 199
+  payload_file: payloads/mixe-0125.txt
+  pressure_level: CRITICAL
+  scenario_id: mixe-0125
+  source_type: log
+  split: calibration
+- category: mixed_critical
+  ground_truth:
+    acceptable_actions:
+    - COMPRESS_AGGRESSIVE
+    acceptable_levels:
+    - L3
+    expected_action: COMPRESS_AGGRESSIVE
+    expected_level: L3
+    expected_reason_keywords:
+    - mixed
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - 'ERROR: database failure'
+    - CVE-2026-0002
+    - port 5434
+    recoverability_required: false
+  input_tokens: 199
+  payload_file: payloads/mixe-0126.txt
+  pressure_level: EMERGENCY
+  scenario_id: mixe-0126
+  source_type: log
+  split: calibration
+- category: mixed_critical
+  ground_truth:
+    acceptable_actions:
+    - KEEP_RAW
+    acceptable_levels:
+    - L0
+    expected_action: KEEP_RAW
+    expected_level: L0
+    expected_reason_keywords:
+    - protected_content
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - 'ERROR: database failure'
+    - CVE-2026-0003
+    - port 5435
+    recoverability_required: true
+  input_tokens: 199
+  payload_file: payloads/mixe-0127.txt
+  pressure_level: HIGH
+  scenario_id: mixe-0127
+  source_type: log
+  split: holdout
+- category: mixed_critical
+  ground_truth:
+    acceptable_actions:
+    - COMPRESS_AGGRESSIVE
+    acceptable_levels:
+    - L3
+    expected_action: COMPRESS_AGGRESSIVE
+    expected_level: L3
+    expected_reason_keywords:
+    - mixed
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - 'ERROR: database failure'
+    - CVE-2026-0004
+    - port 5436
+    recoverability_required: false
+  input_tokens: 199
+  payload_file: payloads/mixe-0128.txt
+  pressure_level: CRITICAL
+  scenario_id: mixe-0128
+  source_type: log
+  split: holdout
+- category: mixed_critical
+  ground_truth:
+    acceptable_actions:
+    - COMPRESS_AGGRESSIVE
+    acceptable_levels:
+    - L3
+    expected_action: COMPRESS_AGGRESSIVE
+    expected_level: L3
+    expected_reason_keywords:
+    - mixed
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - 'ERROR: database failure'
+    - CVE-2026-0005
+    - port 5437
+    recoverability_required: false
+  input_tokens: 199
+  payload_file: payloads/mixe-0129.txt
+  pressure_level: EMERGENCY
+  scenario_id: mixe-0129
+  source_type: log
+  split: holdout
+- category: mixed_critical
+  ground_truth:
+    acceptable_actions:
+    - KEEP_RAW
+    acceptable_levels:
+    - L0
+    expected_action: KEEP_RAW
+    expected_level: L0
+    expected_reason_keywords:
+    - protected_content
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - 'ERROR: database failure'
+    - CVE-2026-0006
+    - port 5438
+    recoverability_required: true
+  input_tokens: 199
+  payload_file: payloads/mixe-0130.txt
+  pressure_level: HIGH
+  scenario_id: mixe-0130
+  source_type: log
+  split: calibration
+- category: mixed_critical
+  ground_truth:
+    acceptable_actions:
+    - COMPRESS_AGGRESSIVE
+    acceptable_levels:
+    - L3
+    expected_action: COMPRESS_AGGRESSIVE
+    expected_level: L3
+    expected_reason_keywords:
+    - mixed
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - 'ERROR: database failure'
+    - CVE-2026-0007
+    - port 5439
+    recoverability_required: false
+  input_tokens: 199
+  payload_file: payloads/mixe-0131.txt
+  pressure_level: CRITICAL
+  scenario_id: mixe-0131
+  source_type: log
+  split: holdout
+- category: mixed_critical
+  ground_truth:
+    acceptable_actions:
+    - COMPRESS_AGGRESSIVE
+    acceptable_levels:
+    - L3
+    expected_action: COMPRESS_AGGRESSIVE
+    expected_level: L3
+    expected_reason_keywords:
+    - mixed
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - 'ERROR: database failure'
+    - CVE-2026-0008
+    - port 5440
+    recoverability_required: false
+  input_tokens: 199
+  payload_file: payloads/mixe-0132.txt
+  pressure_level: EMERGENCY
+  scenario_id: mixe-0132
+  source_type: log
+  split: holdout
+- category: mixed_critical
+  ground_truth:
+    acceptable_actions:
+    - KEEP_RAW
+    acceptable_levels:
+    - L0
+    expected_action: KEEP_RAW
+    expected_level: L0
+    expected_reason_keywords:
+    - protected_content
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - 'ERROR: database failure'
+    - CVE-2026-0009
+    - port 5441
+    recoverability_required: true
+  input_tokens: 199
+  payload_file: payloads/mixe-0133.txt
+  pressure_level: HIGH
+  scenario_id: mixe-0133
+  source_type: log
+  split: calibration
+- category: mixed_critical
+  ground_truth:
+    acceptable_actions:
+    - COMPRESS_AGGRESSIVE
+    acceptable_levels:
+    - L3
+    expected_action: COMPRESS_AGGRESSIVE
+    expected_level: L3
+    expected_reason_keywords:
+    - mixed
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - 'ERROR: database failure'
+    - CVE-2026-00010
+    - port 5442
+    recoverability_required: false
+  input_tokens: 199
+  payload_file: payloads/mixe-0134.txt
+  pressure_level: CRITICAL
+  scenario_id: mixe-0134
+  source_type: log
+  split: calibration
+- category: mixed_critical
+  ground_truth:
+    acceptable_actions:
+    - COMPRESS_AGGRESSIVE
+    acceptable_levels:
+    - L3
+    expected_action: COMPRESS_AGGRESSIVE
+    expected_level: L3
+    expected_reason_keywords:
+    - mixed
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - 'ERROR: database failure'
+    - CVE-2026-00011
+    - port 5443
+    recoverability_required: false
+  input_tokens: 199
+  payload_file: payloads/mixe-0135.txt
+  pressure_level: EMERGENCY
+  scenario_id: mixe-0135
+  source_type: log
+  split: calibration
+- category: mixed_critical
+  ground_truth:
+    acceptable_actions:
+    - KEEP_RAW
+    acceptable_levels:
+    - L0
+    expected_action: KEEP_RAW
+    expected_level: L0
+    expected_reason_keywords:
+    - protected_content
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - 'ERROR: database failure'
+    - CVE-2026-00012
+    - port 5444
+    recoverability_required: true
+  input_tokens: 199
+  payload_file: payloads/mixe-0136.txt
+  pressure_level: HIGH
+  scenario_id: mixe-0136
+  source_type: log
+  split: holdout
+- category: mixed_critical
+  ground_truth:
+    acceptable_actions:
+    - COMPRESS_AGGRESSIVE
+    acceptable_levels:
+    - L3
+    expected_action: COMPRESS_AGGRESSIVE
+    expected_level: L3
+    expected_reason_keywords:
+    - mixed
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - 'ERROR: database failure'
+    - CVE-2026-00013
+    - port 5445
+    recoverability_required: false
+  input_tokens: 199
+  payload_file: payloads/mixe-0137.txt
+  pressure_level: CRITICAL
+  scenario_id: mixe-0137
+  source_type: log
+  split: holdout
+- category: mixed_critical
+  ground_truth:
+    acceptable_actions:
+    - COMPRESS_AGGRESSIVE
+    acceptable_levels:
+    - L3
+    expected_action: COMPRESS_AGGRESSIVE
+    expected_level: L3
+    expected_reason_keywords:
+    - mixed
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - 'ERROR: database failure'
+    - CVE-2026-00014
+    - port 5446
+    recoverability_required: false
+  input_tokens: 199
+  payload_file: payloads/mixe-0138.txt
+  pressure_level: EMERGENCY
+  scenario_id: mixe-0138
+  source_type: log
+  split: calibration
+- category: keep_raw
+  ground_truth:
+    acceptable_actions:
+    - KEEP_RAW
+    acceptable_levels:
+    - L0
+    expected_action: KEEP_RAW
+    expected_level: L0
+    expected_reason_keywords:
+    - protected
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - password
+    - api_key
+    recoverability_required: false
+  input_tokens: 22
+  payload_file: payloads/keep-0139.txt
+  pressure_level: LOW
+  scenario_id: keep-0139
+  source_type: log
+  split: calibration
+- category: keep_raw
+  ground_truth:
+    acceptable_actions:
+    - KEEP_RAW
+    acceptable_levels:
+    - L0
+    expected_action: KEEP_RAW
+    expected_level: L0
+    expected_reason_keywords:
+    - source_code
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields: []
+    recoverability_required: false
+  input_tokens: 15
+  payload_file: payloads/keep-0140.txt
+  pressure_level: LOW
+  scenario_id: keep-0140
+  source_type: source_code
+  split: calibration
+- category: keep_raw
+  ground_truth:
+    acceptable_actions:
+    - KEEP_RAW
+    acceptable_levels:
+    - L0
+    expected_action: KEEP_RAW
+    expected_level: L0
+    expected_reason_keywords:
+    - critical
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - AuthError
+    - auth.py:42
+    recoverability_required: false
+  input_tokens: 11
+  payload_file: payloads/keep-0141.txt
+  pressure_level: MODERATE
+  scenario_id: keep-0141
+  source_type: log
+  split: holdout
+- category: keep_raw
+  ground_truth:
+    acceptable_actions:
+    - KEEP_RAW
+    acceptable_levels:
+    - L0
+    expected_action: KEEP_RAW
+    expected_level: L0
+    expected_reason_keywords:
+    - requirement
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - ACCEPTANCE CRITERIA
+    - 185 tests
+    recoverability_required: false
+  input_tokens: 24
+  payload_file: payloads/keep-0142.txt
+  pressure_level: LOW
+  scenario_id: keep-0142
+  source_type: log
+  split: calibration
+- category: keep_raw
+  ground_truth:
+    acceptable_actions:
+    - KEEP_RAW
+    acceptable_levels:
+    - L0
+    expected_action: KEEP_RAW
+    expected_level: L0
+    expected_reason_keywords:
+    - code_annotation
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - TODO
+    - FIXME
+    - CVE-2026-9999
+    recoverability_required: false
+  input_tokens: 25
+  payload_file: payloads/keep-0143.txt
+  pressure_level: LOW
+  scenario_id: keep-0143
+  source_type: source_code
+  split: calibration
+- category: externalize
+  ground_truth:
+    acceptable_actions:
+    - EXTERNALIZE
+    acceptable_levels:
+    - L3
+    expected_action: EXTERNALIZE
+    expected_level: L3
+    expected_reason_keywords:
+    - huge_payload
+    externalization_allowed: true
+    forbidden_losses: []
+    protected_fields: []
+    recoverability_required: false
+  input_tokens: 3341
+  payload_file: payloads/exte-0144.txt
+  pressure_level: EMERGENCY
+  scenario_id: exte-0144
+  source_type: log
+  split: holdout
+- category: externalize
+  ground_truth:
+    acceptable_actions:
+    - EXTERNALIZE
+    acceptable_levels:
+    - L3
+    expected_action: EXTERNALIZE
+    expected_level: L3
+    expected_reason_keywords:
+    - huge_payload
+    externalization_allowed: true
+    forbidden_losses: []
+    protected_fields: []
+    recoverability_required: false
+  input_tokens: 3341
+  payload_file: payloads/exte-0145.txt
+  pressure_level: EMERGENCY
+  scenario_id: exte-0145
+  source_type: log
+  split: holdout
+- category: externalize
+  ground_truth:
+    acceptable_actions:
+    - EXTERNALIZE
+    acceptable_levels:
+    - L3
+    expected_action: EXTERNALIZE
+    expected_level: L3
+    expected_reason_keywords:
+    - huge_payload
+    externalization_allowed: true
+    forbidden_losses: []
+    protected_fields: []
+    recoverability_required: false
+  input_tokens: 3341
+  payload_file: payloads/exte-0146.txt
+  pressure_level: EMERGENCY
+  scenario_id: exte-0146
+  source_type: log
+  split: calibration
+- category: externalize
+  ground_truth:
+    acceptable_actions:
+    - EXTERNALIZE
+    acceptable_levels:
+    - L3
+    expected_action: EXTERNALIZE
+    expected_level: L3
+    expected_reason_keywords:
+    - huge_payload
+    externalization_allowed: true
+    forbidden_losses: []
+    protected_fields: []
+    recoverability_required: false
+  input_tokens: 3341
+  payload_file: payloads/exte-0147.txt
+  pressure_level: EMERGENCY
+  scenario_id: exte-0147
+  source_type: log
+  split: calibration
+- category: externalize
+  ground_truth:
+    acceptable_actions:
+    - EXTERNALIZE
+    acceptable_levels:
+    - L3
+    expected_action: EXTERNALIZE
+    expected_level: L3
+    expected_reason_keywords:
+    - huge_payload
+    externalization_allowed: true
+    forbidden_losses: []
+    protected_fields: []
+    recoverability_required: false
+  input_tokens: 3341
+  payload_file: payloads/exte-0148.txt
+  pressure_level: EMERGENCY
+  scenario_id: exte-0148
+  source_type: log
+  split: calibration
+- category: logs
+  ground_truth:
+    acceptable_actions:
+    - COMPRESS_AGGRESSIVE
+    acceptable_levels:
+    - L3
+    expected_action: COMPRESS_AGGRESSIVE
+    expected_level: L3
+    expected_reason_keywords:
+    - emergency
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - 'ERROR: fatal'
+    recoverability_required: false
+  input_tokens: 200
+  payload_file: payloads/logs-0149.txt
+  pressure_level: EMERGENCY
+  scenario_id: logs-0149
+  source_type: log
+  split: calibration
+- category: json
+  ground_truth:
+    acceptable_actions:
+    - KEEP_RAW
+    acceptable_levels:
+    - L0
+    expected_action: KEEP_RAW
+    expected_level: L0
+    expected_reason_keywords:
+    - small
+    externalization_allowed: false
+    forbidden_losses: []
+    protected_fields:
+    - id
+    - name
+    recoverability_required: false
+  input_tokens: 500
+  payload_file: payloads/json-0150.txt
+  pressure_level: LOW
+  scenario_id: json-0150
+  source_type: json
+  split: calibration

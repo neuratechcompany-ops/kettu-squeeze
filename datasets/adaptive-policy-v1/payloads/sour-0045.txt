@@ -1,0 +1,4 @@
+class DatabasePool:
+    def __init__(self, url, max_conn=10):
+        self.url = url
+        self.pool = []

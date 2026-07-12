@@ -1,0 +1,9 @@
+# Config v8
+database:
+  host: db-8.example.com
+  port: 5440
+  user: admin
+  password: secret8
+security:
+  tls: true
+  rate_limit: 180

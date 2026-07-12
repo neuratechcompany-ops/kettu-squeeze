@@ -1,0 +1,9 @@
+# Config v3
+database:
+  host: db-3.example.com
+  port: 5435
+  user: admin
+  password: secret3
+security:
+  tls: true
+  rate_limit: 130

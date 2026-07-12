@@ -1,0 +1,1 @@
+def validate(input): return len(input) < 1000

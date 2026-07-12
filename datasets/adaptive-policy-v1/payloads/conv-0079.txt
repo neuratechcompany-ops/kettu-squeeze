@@ -1,0 +1,10 @@
+User: How do I configure the database?
+Agent: Update config.yaml: host=db.example.com, port=5432, user=app.
+User: How do I configure the database?
+Agent: Update config.yaml: host=db.example.com, port=5432, user=app.
+User: How do I configure the database?
+Agent: Update config.yaml: host=db.example.com, port=5432, user=app.
+User: How do I configure the database?
+Agent: Update config.yaml: host=db.example.com, port=5432, user=app.
+User: How do I configure the database?
+Agent: Update config.yaml: host=db.example.com, port=5432, user=app.

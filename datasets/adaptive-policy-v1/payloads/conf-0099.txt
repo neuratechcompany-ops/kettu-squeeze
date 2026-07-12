@@ -1,0 +1,9 @@
+# Config v5
+database:
+  host: db-5.example.com
+  port: 5437
+  user: admin
+  password: secret5
+security:
+  tls: true
+  rate_limit: 150

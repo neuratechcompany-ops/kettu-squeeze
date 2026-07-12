@@ -1,0 +1,9 @@
+# Config v4
+database:
+  host: db-4.example.com
+  port: 5436
+  user: admin
+  password: secret4
+security:
+  tls: true
+  rate_limit: 140

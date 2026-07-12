@@ -1,0 +1,1 @@
+{"token": "sk-secret12345", "user": "admin"}

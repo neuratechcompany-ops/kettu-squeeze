@@ -120,6 +120,8 @@ class AdaptivePolicyEngine:
         # 4. Decision logic
         if self._should_keep_raw(content, tokens_in, budget, importance):
             decision = self._make_keep_raw(tokens_in, importance, budget)
+        elif tokens_in > 5000 and budget.pressure in (PressureLevel.EMERGENCY, PressureLevel.CRITICAL) and importance.score < 0.7:
+            decision = self._make_externalize(tokens_in, importance, budget)
         elif pressure in (PressureLevel.EMERGENCY, PressureLevel.CRITICAL) and not protected:
             decision = self._make_aggressive(tokens_in, importance, budget, source_type)
         elif pressure == PressureLevel.HIGH:
@@ -148,17 +150,17 @@ class AdaptivePolicyEngine:
         # Small payload
         if tokens < 500:
             return True
-        # High importance + low pressure
+        # High importance + low/moderate pressure
         if importance.score >= 0.85 and budget.pressure in (PressureLevel.LOW, PressureLevel.MODERATE):
             return True
-        # Critical content — never risk
-        if importance.score >= 1.0:
+        # Critical content — never risk at non-emergency
+        if importance.score >= 0.95 and budget.pressure not in (PressureLevel.EMERGENCY,):
             return True
-        # Source code (strict_raw policy)
+        # Source code
         if importance.category == "function_def":
             return True
         # Protected content under non-emergency
-        if is_protected(content) and budget.pressure not in (PressureLevel.EMERGENCY, PressureLevel.CRITICAL):
+        if is_protected(content) and budget.pressure not in (PressureLevel.EMERGENCY,):
             return True
         # Low savings potential
         if tokens < 1000 and budget.pressure == PressureLevel.LOW:
@@ -227,6 +229,20 @@ class AdaptivePolicyEngine:
             estimated_output_tokens=int(tokens * (1 - ratio)),
             preservation_risk=risk,
             expand_probability=0.30,
+        )
+
+    def _make_externalize(
+        self, tokens: int, importance: ImportanceResult, budget: ContextBudget
+    ) -> CompressionDecision:
+        return CompressionDecision(
+            action=CompressionAction.EXTERNALIZE,
+            level=CompressionLevel.L3,
+            strategy="externalize_only",
+            reason=f"externalize: huge_payload={tokens}t pressure={budget.pressure.value}",
+            input_tokens=tokens,
+            estimated_output_tokens=int(tokens * 0.05),  # small ref only
+            preservation_risk=0.02,
+            expand_probability=0.05,
         )
 
     def _select_strategy(self, source_type: str, level: CompressionLevel) -> str:

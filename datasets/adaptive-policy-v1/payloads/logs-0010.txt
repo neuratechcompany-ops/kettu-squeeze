@@ -1,0 +1,12 @@
+ERROR: timeout on port 5432
+INFO: retry 1/3
+INFO: retry 1/3
+INFO: retry 1/3
+INFO: retry 1/3
+INFO: retry 1/3
+ERROR: timeout on port 5432
+INFO: retry 2/3
+INFO: retry 2/3
+INFO: retry 2/3
+INFO: retry 2/3
+INFO: retry 2/3

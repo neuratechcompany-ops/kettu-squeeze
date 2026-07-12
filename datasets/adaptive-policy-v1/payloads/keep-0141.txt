@@ -1,0 +1,1 @@
+Traceback: AuthError at auth.py:42

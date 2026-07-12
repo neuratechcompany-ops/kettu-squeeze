@@ -1,0 +1,9 @@
+# Config v6
+database:
+  host: db-6.example.com
+  port: 5438
+  user: admin
+  password: secret6
+security:
+  tls: true
+  rate_limit: 160

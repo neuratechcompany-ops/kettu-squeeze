@@ -1,0 +1,1 @@
+TODO: fix security hole in auth module. FIXME: CVE-2026-9999 patch pending.

@@ -1,0 +1,2 @@
+ERROR: CVE-2026-0001 detected in auth module
+WARNING: api_key: sk-exposed

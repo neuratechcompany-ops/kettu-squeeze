@@ -1,0 +1,4 @@
+fn validate_input(data: &[u8]) -> Result<(), Error> {
+    if data.len() > MAX_SIZE { return Err(Error::TooLarge); }
+    Ok(())
+}

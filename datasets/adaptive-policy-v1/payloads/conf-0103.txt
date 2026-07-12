@@ -1,0 +1,9 @@
+# Config v9
+database:
+  host: db-9.example.com
+  port: 5441
+  user: admin
+  password: secret9
+security:
+  tls: true
+  rate_limit: 190

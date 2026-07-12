@@ -1,0 +1,9 @@
+# Config v2
+database:
+  host: db-2.example.com
+  port: 5434
+  user: admin
+  password: secret2
+security:
+  tls: true
+  rate_limit: 120

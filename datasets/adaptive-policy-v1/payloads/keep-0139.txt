@@ -1,0 +1,1 @@
+critical credentials: password=super_secret_123, api_key=sk-critical

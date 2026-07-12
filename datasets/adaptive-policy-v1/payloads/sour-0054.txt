@@ -1,0 +1,4 @@
+def authenticate(token):
+    if not token:
+        raise AuthError()
+    return verify(token)

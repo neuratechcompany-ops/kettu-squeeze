@@ -1,0 +1,9 @@
+# Config v7
+database:
+  host: db-7.example.com
+  port: 5439
+  user: admin
+  password: secret7
+security:
+  tls: true
+  rate_limit: 170

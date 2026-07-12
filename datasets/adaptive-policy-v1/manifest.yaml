@@ -1,0 +1,20 @@
+calibration_count: 105
+categories:
+  configs: 10
+  conversation: 20
+  externalize: 5
+  json: 19
+  keep_raw: 5
+  large_payloads: 10
+  logs: 21
+  mixed_critical: 15
+  repeated_noise: 10
+  source_code: 20
+  tracebacks: 15
+checksum: sha256:1fec18f7aeb98dd3
+created_at: '2026-07-12'
+dataset_id: adaptive-policy-v1
+holdout_count: 45
+scenario_count: 150
+split_seed: 42
+version: 1.0.0
