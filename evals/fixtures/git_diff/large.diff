@@ -1,0 +1,18 @@
+diff --git a/data/items.json b/data/items.json
+--- a/data/items.json
++++ b/data/items.json
+@@ -1,50 +1,75 @@
+ [
+-  {"id": 1, "name": "Item One", "price": 10.0},
+-  {"id": 2, "name": "Item Two", "price": 20.0},
+-  {"id": 3, "name": "Item Three", "price": 30.0},
+-  {"id": 4, "name": "Item Four", "price": 40.0},
+-  {"id": 5, "name": "Item Five", "price": 50.0}
++  {"id": 1, "name": "Updated Item One", "price": 15.0, "category": "A"},
++  {"id": 2, "name": "Updated Item Two", "price": 25.0, "category": "A"},
++  {"id": 3, "name": "Item Three", "price": 30.0, "category": "B"},
++  {"id": 4, "name": "Item Four", "price": 40.0, "category": "B"},
++  {"id": 5, "name": "Item Five", "price": 50.0, "category": "C"},
++  {"id": 6, "name": "New Item", "price": 60.0, "category": "C"},
++  {"id": 7, "name": "New Item 2", "price": 70.0, "category": "D"}
+ ]

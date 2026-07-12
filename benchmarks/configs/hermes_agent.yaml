@@ -1,0 +1,48 @@
+# Kettu Squeeze — Hermes Agent Configuration
+# Phase 4: Real Agent Quality Evaluation
+
+agent:
+  name: "Hermes Agent"
+  model:
+    provider: "deepseek"
+    model: "deepseek-v4-pro"
+    endpoint: "api.deepseek.com"
+  runtime:
+    type: "cloud_api"
+  inference:
+    temperature: 0.0          # deterministic for benchmarks
+    top_p: 1.0
+    max_tokens: 4096
+    seed: 42                  # fixed seed (provider-supported)
+    reasoning_mode: false
+
+session:
+  timeout_seconds: 120
+  context_limit_tokens: 128000
+
+tools:
+  enabled:
+    - terminal
+    - read_file
+    - web_search
+    - squeeze_compress
+    - squeeze_expand
+    - squeeze_read_file
+
+benchmark:
+  repeats: 1                  # single run (multi-run requires separate sessions)
+  modes:
+    - raw
+    - compressed
+  scenarios:
+    - code_find_bug_auth
+    - code_refactor_worker
+    - code_architecture_question
+    - code_write_test
+    - code_security_audit
+    - tool_pytest_mixed
+    - tool_docker_crash_loop
+    - tool_large_json
+    - tool_git_diff_analysis
+    - tool_k8s_crash
+    - long_session_200

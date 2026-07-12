@@ -1,0 +1,10 @@
+PASS  src/__tests__/utils.test.js
+PASS  src/__tests__/api.test.js
+FAIL  src/__tests__/db.test.js
+  ● Database › should delete entry
+    expect(received).toBeNull()
+    Received: {"id": 1, "key": "test", "value": "data"}
+
+Test Suites: 2 passed, 1 failed
+Tests:       8 passed, 1 failed
+Time:        2.567s

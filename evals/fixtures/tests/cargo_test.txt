@@ -1,0 +1,17 @@
+running 12 tests
+test engine::tests::test_insert_get ... ok
+test engine::tests::test_remove ... ok
+test middleware::tests::test_pipeline ... ok
+test middleware::tests::test_auth_missing ... FAILED
+test middleware::tests::test_logging ... ok
+
+failures:
+
+---- middleware::tests::test_auth_missing stdout ----
+thread 'middleware::tests::test_auth_missing' panicked at src/middleware.rs:89:9:
+assertion failed: result.is_err()
+
+failures:
+    middleware::tests::test_auth_missing
+
+test result: FAILED. 4 passed; 1 failed; 0 ignored

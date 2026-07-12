@@ -1,0 +1,14 @@
+diff --git a/src/old_name.py b/src/new_name.py
+similarity index 95%
+rename from src/old_name.py
+rename to src/new_name.py
+--- a/src/old_name.py
++++ b/src/new_name.py
+@@ -1,5 +1,5 @@
+-"""Old module name."""
++"""New module name."""
+ 
+ 
+-def old_function():
++def new_function():
+     return 42

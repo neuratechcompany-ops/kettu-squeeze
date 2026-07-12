@@ -1,0 +1,1 @@
+{"string": "hello", "int": 42, "float": 3.14159, "bool": true, "null": null, "list": [1, "two", 3.0, null], "obj": {"nested": true}}

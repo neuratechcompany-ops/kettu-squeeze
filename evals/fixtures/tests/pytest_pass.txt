@@ -1,0 +1,10 @@
+test_auth.py::test_hash_password PASSED
+test_auth.py::test_verify_password PASSED
+test_auth.py::test_create_user PASSED
+test_auth.py::test_register PASSED
+test_auth.py::test_authenticate PASSED
+test_worker.py::test_submit PASSED
+test_worker.py::test_retry PASSED
+test_parser.py::test_parse_expr PASSED
+test_parser.py::test_parse_term PASSED
+9 passed in 2.34s

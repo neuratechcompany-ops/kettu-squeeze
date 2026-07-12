@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/app/main.py", line 42, in process_order
+    payment = PaymentService.charge(order.total)
+  File "/app/payments.py", line 88, in charge
+    response = self.gateway.authorize(amount)
+  File "/app/gateway.py", line 15, in authorize
+    raise GatewayError("Timeout connecting to payment processor")
+GatewayError: Timeout connecting to payment processor

@@ -1,0 +1,205 @@
+{
+  "model": "gpt-oss:120b",
+  "scenarios": [
+    {
+      "scenario_id": "code_find_bug_auth",
+      "mode": "raw",
+      "success": true,
+      "critical_recall": 1.0,
+      "input_tokens": 122,
+      "latency_ms": 4010.5,
+      "expand_calls": 0,
+      "error": null
+    },
+    {
+      "scenario_id": "code_find_bug_auth",
+      "mode": "compressed",
+      "success": true,
+      "critical_recall": 1.0,
+      "input_tokens": 122,
+      "latency_ms": 3961.8,
+      "expand_calls": 0,
+      "error": null
+    },
+    {
+      "scenario_id": "code_refactor_worker",
+      "mode": "raw",
+      "success": true,
+      "critical_recall": 1.0,
+      "input_tokens": 198,
+      "latency_ms": 5314.1,
+      "expand_calls": 0,
+      "error": null
+    },
+    {
+      "scenario_id": "code_refactor_worker",
+      "mode": "compressed",
+      "success": true,
+      "critical_recall": 1.0,
+      "input_tokens": 198,
+      "latency_ms": 5382.9,
+      "expand_calls": 0,
+      "error": null
+    },
+    {
+      "scenario_id": "code_architecture_question",
+      "mode": "raw",
+      "success": true,
+      "critical_recall": 1.0,
+      "input_tokens": 311,
+      "latency_ms": 5565.2,
+      "expand_calls": 0,
+      "error": null
+    },
+    {
+      "scenario_id": "code_architecture_question",
+      "mode": "compressed",
+      "success": true,
+      "critical_recall": 1.0,
+      "input_tokens": 311,
+      "latency_ms": 5543.2,
+      "expand_calls": 0,
+      "error": null
+    },
+    {
+      "scenario_id": "code_write_test",
+      "mode": "raw",
+      "success": true,
+      "critical_recall": 1.0,
+      "input_tokens": 171,
+      "latency_ms": 8720.1,
+      "expand_calls": 0,
+      "error": null
+    },
+    {
+      "scenario_id": "code_write_test",
+      "mode": "compressed",
+      "success": true,
+      "critical_recall": 1.0,
+      "input_tokens": 171,
+      "latency_ms": 8766.8,
+      "expand_calls": 0,
+      "error": null
+    },
+    {
+      "scenario_id": "code_security_audit",
+      "mode": "raw",
+      "success": true,
+      "critical_recall": 1.0,
+      "input_tokens": 217,
+      "latency_ms": 4651.7,
+      "expand_calls": 0,
+      "error": null
+    },
+    {
+      "scenario_id": "code_security_audit",
+      "mode": "compressed",
+      "success": true,
+      "critical_recall": 1.0,
+      "input_tokens": 217,
+      "latency_ms": 4645.4,
+      "expand_calls": 0,
+      "error": null
+    },
+    {
+      "scenario_id": "tool_pytest_mixed",
+      "mode": "raw",
+      "success": true,
+      "critical_recall": 1.0,
+      "input_tokens": 250,
+      "latency_ms": 3391.1,
+      "expand_calls": 0,
+      "error": null
+    },
+    {
+      "scenario_id": "tool_pytest_mixed",
+      "mode": "compressed",
+      "success": true,
+      "critical_recall": 1.0,
+      "input_tokens": 250,
+      "latency_ms": 3284.7,
+      "expand_calls": 0,
+      "error": null
+    },
+    {
+      "scenario_id": "tool_docker_crash_loop",
+      "mode": "raw",
+      "success": true,
+      "critical_recall": 1.0,
+      "input_tokens": 297,
+      "latency_ms": 3301.4,
+      "expand_calls": 0,
+      "error": null
+    },
+    {
+      "scenario_id": "tool_docker_crash_loop",
+      "mode": "compressed",
+      "success": true,
+      "critical_recall": 1.0,
+      "input_tokens": 231,
+      "latency_ms": 3320.5,
+      "expand_calls": 0,
+      "error": null
+    },
+    {
+      "scenario_id": "tool_large_json",
+      "mode": "raw",
+      "success": true,
+      "critical_recall": 1.0,
+      "input_tokens": 1758,
+      "latency_ms": 4073.0,
+      "expand_calls": 0,
+      "error": null
+    },
+    {
+      "scenario_id": "tool_large_json",
+      "mode": "compressed",
+      "success": true,
+      "critical_recall": 1.0,
+      "input_tokens": 1302,
+      "latency_ms": 11206.9,
+      "expand_calls": 0,
+      "error": null
+    },
+    {
+      "scenario_id": "tool_git_diff_analysis",
+      "mode": "raw",
+      "success": true,
+      "critical_recall": 1.0,
+      "input_tokens": 269,
+      "latency_ms": 5866.9,
+      "expand_calls": 0,
+      "error": null
+    },
+    {
+      "scenario_id": "tool_git_diff_analysis",
+      "mode": "compressed",
+      "success": true,
+      "critical_recall": 1.0,
+      "input_tokens": 269,
+      "latency_ms": 5885.6,
+      "expand_calls": 0,
+      "error": null
+    },
+    {
+      "scenario_id": "tool_k8s_crash",
+      "mode": "raw",
+      "success": true,
+      "critical_recall": 1.0,
+      "input_tokens": 240,
+      "latency_ms": 3888.6,
+      "expand_calls": 0,
+      "error": null
+    },
+    {
+      "scenario_id": "tool_k8s_crash",
+      "mode": "compressed",
+      "success": true,
+      "critical_recall": 1.0,
+      "input_tokens": 262,
+      "latency_ms": 3052.0,
+      "expand_calls": 0,
+      "error": null
+    }
+  ]
+}

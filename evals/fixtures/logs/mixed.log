@@ -1,0 +1,8 @@
+INFO: Starting service
+ERROR: Failed to connect to https://api.example.com/v2/health — timeout after 30s
+WARN: Retrying in 5s...
+INFO: Connected to https://api.example.com/v2/health — 200 OK
+INFO: Service ready on https://localhost:8443
+INFO: Service ready on https://localhost:8443
+INFO: Service ready on https://localhost:8443
+DEBUG: Polling https://metrics.example.com every 15s

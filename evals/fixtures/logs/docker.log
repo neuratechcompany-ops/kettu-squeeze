@@ -1,0 +1,8 @@
+Container app_web_1  Started
+Container app_db_1   Started
+Container app_web_1  Stopped (exit code 137)
+Container app_web_1  Started
+Container app_web_1  Stopped (exit code 137)
+Container app_web_1  Started
+Container app_web_1  Stopped (exit code 137)
+Container app_cache_1 Healthy

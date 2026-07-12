@@ -1,0 +1,127 @@
+{
+  "model": "deepseek-v4-pro",
+  "quality_measured": true,
+  "scenarios": [
+    {
+      "scenario_id": "code_find_bug_auth",
+      "raw_success": true,
+      "compressed_success": true,
+      "raw_recall": 1.0,
+      "compressed_recall": 1.0,
+      "quality_delta_pct": 0.0,
+      "token_savings_pct": 0.0,
+      "nab_score": 0.0,
+      "nab_status": "neutral"
+    },
+    {
+      "scenario_id": "code_refactor_worker",
+      "raw_success": true,
+      "compressed_success": true,
+      "raw_recall": 1.0,
+      "compressed_recall": 1.0,
+      "quality_delta_pct": 0.0,
+      "token_savings_pct": 0.0,
+      "nab_score": 0.0,
+      "nab_status": "neutral"
+    },
+    {
+      "scenario_id": "code_architecture_question",
+      "raw_success": true,
+      "compressed_success": true,
+      "raw_recall": 1.0,
+      "compressed_recall": 1.0,
+      "quality_delta_pct": 0.0,
+      "token_savings_pct": 0.0,
+      "nab_score": 0.0,
+      "nab_status": "neutral"
+    },
+    {
+      "scenario_id": "code_write_test",
+      "raw_success": true,
+      "compressed_success": true,
+      "raw_recall": 1.0,
+      "compressed_recall": 1.0,
+      "quality_delta_pct": 0.0,
+      "token_savings_pct": 0.0,
+      "nab_score": 0.0,
+      "nab_status": "neutral"
+    },
+    {
+      "scenario_id": "code_security_audit",
+      "raw_success": true,
+      "compressed_success": true,
+      "raw_recall": 1.0,
+      "compressed_recall": 1.0,
+      "quality_delta_pct": 0.0,
+      "token_savings_pct": 0.0,
+      "nab_score": 0.0,
+      "nab_status": "neutral"
+    },
+    {
+      "scenario_id": "tool_pytest_mixed",
+      "raw_success": true,
+      "compressed_success": true,
+      "raw_recall": 1.0,
+      "compressed_recall": 1.0,
+      "quality_delta_pct": 0.0,
+      "token_savings_pct": 0.0,
+      "nab_score": 0.0,
+      "nab_status": "neutral"
+    },
+    {
+      "scenario_id": "tool_docker_crash_loop",
+      "raw_success": true,
+      "compressed_success": true,
+      "raw_recall": 1.0,
+      "compressed_recall": 1.0,
+      "quality_delta_pct": 0.0,
+      "token_savings_pct": 25.3,
+      "nab_score": 0.0759,
+      "nab_status": "neutral"
+    },
+    {
+      "scenario_id": "tool_large_json",
+      "raw_success": true,
+      "compressed_success": true,
+      "raw_recall": 1.0,
+      "compressed_recall": 1.0,
+      "quality_delta_pct": 0.0,
+      "token_savings_pct": 26.5,
+      "nab_score": 0.0794,
+      "nab_status": "neutral"
+    },
+    {
+      "scenario_id": "tool_git_diff_analysis",
+      "raw_success": true,
+      "compressed_success": true,
+      "raw_recall": 1.0,
+      "compressed_recall": 1.0,
+      "quality_delta_pct": 0.0,
+      "token_savings_pct": 0.0,
+      "nab_score": 0.0,
+      "nab_status": "neutral"
+    },
+    {
+      "scenario_id": "tool_k8s_crash",
+      "raw_success": true,
+      "compressed_success": true,
+      "raw_recall": 1.0,
+      "compressed_recall": 1.0,
+      "quality_delta_pct": 0.0,
+      "token_savings_pct": -11.1,
+      "nab_score": -0.0332,
+      "nab_status": "neutral"
+    },
+    {
+      "scenario_id": "long_session_200",
+      "raw_success": true,
+      "compressed_success": true,
+      "raw_recall": 1.0,
+      "compressed_recall": 1.0,
+      "quality_delta_pct": 0.0,
+      "token_savings_pct": -1.6,
+      "nab_score": -0.0048,
+      "nab_status": "neutral"
+    }
+  ]
+}

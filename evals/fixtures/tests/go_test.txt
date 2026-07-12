@@ -1,0 +1,7 @@
+ok      github.com/user/auth        0.234s
+ok      github.com/user/worker      1.023s
+--- FAIL: TestParser (0.05s)
+    parser_test.go:42: expected 15, got 14
+FAIL    github.com/user/parser      0.120s
+FAIL
+exit status 1

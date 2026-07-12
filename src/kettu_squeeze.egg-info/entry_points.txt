@@ -1,0 +1,3 @@
+[console_scripts]
+kettu-squeeze = kettu_squeeze.cli.main:app
+kettu-squeeze-mcp = kettu_squeeze.api.mcp_server:main

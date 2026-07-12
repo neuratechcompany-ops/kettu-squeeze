@@ -1,0 +1,18 @@
+diff --git a/src/deprecated.py b/src/deprecated.py
+deleted file mode 100644
+--- a/src/deprecated.py
++++ /dev/null
+@@ -1,50 +0,0 @@
+-"""Deprecated module."""
+-import os
+-import sys
+-
+-def old_function(x):
+-    return x * 2
+-
+-class OldClass:
+-    def __init__(self):
+-        self.data = []
+-
+-    def process(self):
+-        return len(self.data)

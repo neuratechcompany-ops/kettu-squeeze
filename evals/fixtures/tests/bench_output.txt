@@ -1,0 +1,6 @@
+BenchmarkHash/blake3-16    1000000    1234 ns/op
+BenchmarkHash/sha256-16     500000    2456 ns/op
+BenchmarkHash/md5-16       2000000     512 ns/op
+BenchmarkSort/1000           50000   34567 ns/op
+BenchmarkSort/10000           5000  456789 ns/op
+ok      benchmark      15.234s

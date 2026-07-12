@@ -1,0 +1,9 @@
+[2026-07-12 10:15:30] ERROR: Connection refused to database at postgresql://db.example.com:5432/main
+[2026-07-12 10:15:30] ERROR: Connection refused to database at postgresql://db.example.com:5432/main
+[2026-07-12 10:15:30] ERROR: Connection refused to database at postgresql://db.example.com:5432/main
+[2026-07-12 10:15:31] WARN: Retry attempt 1/5
+[2026-07-12 10:15:32] ERROR: Connection refused to database at postgresql://db.example.com:5432/main
+[2026-07-12 10:15:33] WARN: Retry attempt 2/5
+[2026-07-12 10:15:34] ERROR: Connection refused to database at postgresql://db.example.com:5432/main
+[2026-07-12 10:15:35] CRITICAL: Max retries exceeded. Service unavailable.
+[2026-07-12 10:15:35] INFO: Falling back to cache.

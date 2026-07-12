@@ -1,0 +1,41 @@
+[project]
+name = "kettu-squeeze"
+version = "0.1.0"
+description = "Recoverable Context Optimization for AI agents"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+authors = [{name = "Aurum Kettunen"}]
+readme = "README.md"
+
+dependencies = [
+    "fastapi>=0.115",
+    "uvicorn>=0.34",
+    "pydantic>=2.10",
+    "typer>=0.15",
+    "structlog>=24.4",
+    "prometheus-client>=0.21",
+    "tiktoken>=0.8",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.3",
+    "pytest-asyncio>=0.24",
+    "hypothesis>=6.122",
+    "httpx>=0.28",
+]
+
+[project.scripts]
+kettu-squeeze = "kettu_squeeze.cli.main:app"
+kettu-squeeze-mcp = "kettu_squeeze.api.mcp_server:main"
+
+[build-system]
+requires = ["setuptools>=75", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"

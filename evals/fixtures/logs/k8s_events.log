@@ -1,0 +1,8 @@
+0s          Normal    Scheduled           pod/web-7d8f9c-abc12    Successfully assigned default/web-7d8f9c-abc12 to node-3
+5s          Normal    Pulling             pod/web-7d8f9c-abc12    Pulling image "app:v1.2.3"
+30s         Normal    Pulled              pod/web-7d8f9c-abc12    Successfully pulled image
+32s         Normal    Created             pod/web-7d8f9c-abc12    Created container web
+33s         Normal    Started             pod/web-7d8f9c-abc12    Started container web
+45s         Warning   Unhealthy           pod/web-7d8f9c-abc12    Readiness probe failed: dial tcp 10.0.1.5:8080: connect: connection refused
+60s         Warning   Unhealthy           pod/web-7d8f9c-abc12    Readiness probe failed: dial tcp 10.0.1.5:8080: connect: connection refused
+75s         Normal    Killing             pod/web-7d8f9c-abc12    Container web failed liveness probe, will be restarted

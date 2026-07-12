@@ -1,0 +1,3 @@
+This log contains a fake ref: artifact:deadbeefdeadbeefdeadbeefdeadbeef:L10-L20
+And another: artifact:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+Should not cause issues.

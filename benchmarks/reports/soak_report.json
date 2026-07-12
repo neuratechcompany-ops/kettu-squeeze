@@ -1,0 +1,11 @@
+{
+  "events": 10000,
+  "sessions": 100,
+  "workers": 10,
+  "duration_seconds": 5.09,
+  "events_per_second": 1964.6,
+  "total_errors": 0,
+  "total_expanded": 0,
+  "total_broken_refs": 0,
+  "workers_completed": 10
+}

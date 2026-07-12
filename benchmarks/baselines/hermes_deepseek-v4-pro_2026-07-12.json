@@ -1,0 +1,20 @@
+{
+  "model": "deepseek-v4-pro",
+  "date": "2026-07-12",
+  "quality_measured": true,
+  "avg_raw_recall": 1.0,
+  "avg_compressed_recall": 1.0,
+  "avg_quality_delta_pct": 0.0,
+  "avg_nab": 0.0107,
+  "nab_status": "CONDITIONAL PASS",
+  "hard_gates": {
+    "broken_refs": 0,
+    "cross_session_leaks": 0,
+    "byte_exact_recovery": "100%",
+    "unicode_panics": 0,
+    "quality_degradation": "0.0% \u2264 3%"
+  },
+  "config": "benchmarks/configs/hermes_agent.yaml",
+  "test_count": 88,
+  "scenario_count": 11
+}

@@ -1,0 +1,1 @@
+{"errors": [{"code": 401, "message": "Unauthorized", "path": "/api/admin"}, {"code": 404, "message": "Not Found", "path": "/api/users/999"}, {"code": 500, "message": "Internal Server Error", "path": "/api/data"}]}

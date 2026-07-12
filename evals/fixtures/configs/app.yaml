@@ -1,0 +1,10 @@
+server:
+  host: 0.0.0.0
+  port: 8080
+  tls: true
+database:
+  url: postgresql://localhost/main
+  pool_size: 10
+  timeout: 30
+logging:
+  level: INFO

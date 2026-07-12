@@ -1,0 +1,15 @@
+[INFO] Server starting on port 8080
+[INFO] Database connected
+[INFO] Cache warmed: 1523 entries
+[WARN] Rate limit approaching: 85% of quota
+[INFO] Request GET /api/users 200 12ms
+[INFO] Request POST /api/login 401 3ms
+[INFO] Request GET /api/users 200 8ms
+[ERROR] Unexpected error in handler: NullPointerException at UserService.java:142
+[ERROR] Unexpected error in handler: NullPointerException at UserService.java:142
+[ERROR] Unexpected error in handler: NullPointerException at UserService.java:142
+[INFO] Request GET /api/health 200 1ms
+[INFO] Request GET /api/health 200 1ms
+[INFO] Request GET /api/health 200 1ms
+[INFO] Request GET /api/health 200 1ms
+[INFO] Request GET /api/health 200 1ms

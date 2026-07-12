@@ -1,0 +1,63 @@
+Metadata-Version: 2.4
+Name: kettu-squeeze
+Version: 0.1.0
+Summary: Safe context compression layer for AI agents
+Author: Aurum Kettunen
+License: MIT
+Requires-Python: >=3.11
+Description-Content-Type: text/markdown
+Requires-Dist: fastapi>=0.115
+Requires-Dist: uvicorn>=0.34
+Requires-Dist: pydantic>=2.10
+Requires-Dist: typer>=0.15
+Requires-Dist: structlog>=24.4
+Requires-Dist: prometheus-client>=0.21
+Requires-Dist: tiktoken>=0.8
+Provides-Extra: dev
+Requires-Dist: pytest>=8.3; extra == "dev"
+Requires-Dist: pytest-asyncio>=0.24; extra == "dev"
+Requires-Dist: hypothesis>=6.122; extra == "dev"
+Requires-Dist: httpx>=0.28; extra == "dev"
+
+# Kettu Squeeze
+
+Safe context compression layer for AI agents.
+
+**Status: v0.1.0 Phase 1 — Core engine with artifact store, context ledger, and lossless compressors.**
+
+## Principles
+
+- **Raw is authoritative.** Compression is a view, never the source of truth.
+- **Lossless by default.** Lossy requires explicit policy and recoverable refs.
+- **Session-aware.** Storage cache ≠ model visibility. Context ledger tracks what the model actually saw.
+- **Verify everything.** Every compressed output passes through a verifier.
+
+## Install
+
+```bash
+pip install -e .
+```
+
+## Quick Start
+
+```bash
+# Compress a log file
+kettu-squeeze compress server.log
+
+# Compress JSON
+kettu-squeeze compress --mode lossless data.json
+
+# Expand a reference
+kettu-squeeze expand "artifact:<artifact_id>:L10-L50"
+
+# Check system
+kettu-squeeze doctor
+```
+
+## Architecture
+
+See `docs/ARCHITECTURE.md` for full design.
+
+## License
+
+MIT

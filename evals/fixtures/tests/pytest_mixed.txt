@@ -1,0 +1,7 @@
+test_auth.py::test_hash_password PASSED
+test_auth.py::test_verify_password FAILED
+test_auth.py::test_create_user PASSED
+test_worker.py::test_submit PASSED
+test_worker.py::test_retry FAILED
+test_parser.py::test_parse_expr PASSED
+4 passed, 2 failed in 3.15s

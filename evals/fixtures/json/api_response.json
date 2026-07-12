@@ -1,0 +1,30 @@
+{
+  "status": "ok",
+  "data": {
+    "users": [
+      {
+        "id": 1,
+        "name": "Alice",
+        "email": "alice@example.com",
+        "role": "admin",
+        "last_login": "2026-07-12T08:00:00Z"
+      },
+      {
+        "id": 2,
+        "name": "Bob",
+        "email": "bob@example.com",
+        "role": "user",
+        "last_login": "2026-07-11T15:30:00Z"
+      },
+      {
+        "id": 3,
+        "name": "Charlie",
+        "email": null,
+        "role": "user",
+        "last_login": null
+      }
+    ],
+    "total": 3,
+    "page": 1
+  }
+}

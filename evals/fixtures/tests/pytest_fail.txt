@@ -1,0 +1,7 @@
+test_auth.py::test_hash_password PASSED
+test_auth.py::test_verify_password FAILED - AssertionError: assert False
+test_worker.py::test_submit FAILED - ValueError: invalid worker count
+test_parser.py::test_parse_expr FAILED - TypeError: expected int
+test_parser.py::test_parse_term FAILED - ZeroDivisionError: division by zero
+1 passed, 4 failed in 1.25s
+exit code: 1

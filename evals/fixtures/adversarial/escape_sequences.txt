@@ -1,0 +1,2 @@
+[31mRED[0m [32mGREEN[0m [1mBOLD[0m
+]0;Window Title

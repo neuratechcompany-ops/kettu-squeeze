@@ -1,0 +1,20 @@
+diff --git a/src/auth.py b/src/auth.py
+index a1b2c3d..e4f5g6h 100644
+--- a/src/auth.py
++++ b/src/auth.py
+@@ -10,6 +10,8 @@ def hash_password(password: str, salt: Optional[str] = None) -> tuple[str, str]:
+     h = hashlib.sha256((password + salt).encode()).hexdigest()
+     return h, salt
+ 
++def verify_2fa(code: str) -> bool:
++    return len(code) == 6 and code.isdigit()
+ 
+ def verify_password(password: str, stored_hash: str, salt: str) -> bool:
+     computed, _ = hash_password(password, salt)
+@@ -20,3 +22,6 @@ class AuthService:
+     def __init__(self):
+-        self._users: dict[str, User] = {}
++        self._users: dict[str, User] = {}
++        self._sessions: dict[str, str] = {}
++        self.max_sessions = 100
++        self.token_secret = os.environ.get('TOKEN_SECRET', 'dev-secret')
