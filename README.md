@@ -84,7 +84,7 @@ kettu-squeeze-mcp  # MCP server
 
 ## Docs
 
-[Architecture](docs/ARCHITECTURE.md) · [Invariants](docs/INVARIANTS.md) · [Security](docs/SECURITY.md) · [Audit](docs/AUDIT_REPORT.md) · [Limitations](docs/KNOWN_LIMITATIONS.md) · [Threat Model](docs/THREAT_MODEL.md)
+[Architecture](docs/ARCHITECTURE.md) · [Invariants](docs/INVARIANTS.md) · [Security](docs/SECURITY.md) · [Audit](docs/AUDIT_REPORT.md) · [Limitations](docs/KNOWN_LIMITATIONS.md) · [Operating Assumptions](docs/OPERATING_ASSUMPTIONS.md) · [Threat Model](docs/THREAT_MODEL.md)
 
 ## License
 
