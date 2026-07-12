@@ -164,7 +164,9 @@ class StrategyDispatcher:
         level: str = "L1",
     ) -> Optional[CompressionStrategy]:
         """Find best strategy for this content."""
-        candidates = self.registry.by_format(source_type)
+        # Normalize source_type: remove trailing 's', lowercase
+        normalized = source_type.lower().rstrip("s")
+        candidates = self.registry.by_format(normalized)
         if not candidates:
             candidates = list(self.registry._strategies.values())
 

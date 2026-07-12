@@ -22,7 +22,7 @@ class LogStrategy(CompressionStrategy):
         supported_formats=["log", "docker", "journald", "stdout", "stderr", "tool", "text"],
         expected_ratio=0.35, priority=10)
 
-    def supports(self, c, t): return t in self.descriptor.supported_formats
+    def supports(self, c, t): return t.lower().rstrip("s") in self.descriptor.supported_formats
 
     def compress(self, content, level="L1"):
         if level == "L0": return StrategyResult(compressed=content, original_tokens=self._te(content), compressed_tokens=self._te(content), ratio=1.0)

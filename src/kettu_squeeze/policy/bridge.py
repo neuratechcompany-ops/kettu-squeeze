@@ -79,7 +79,8 @@ class EngineBridge:
         return response, report, None
 
     def _compress_adaptive(self, content, session_id, agent_id, source_type, source_path, budget):
-        """Execute adaptive policy compression."""
+        """Execute adaptive policy compression with specialized strategies."""
+        import kettu_squeeze.strategies.all_strategies  # ensure registration
         t0 = time.perf_counter()
 
         # 1. Policy decision
@@ -91,7 +92,48 @@ class EngineBridge:
         if plan.action == CompressionAction.KEEP_RAW:
             return self._pacify_keep_raw(content, decision, plan, session_id, agent_id, source_type, source_path, policy_ms)
 
-        # 3. Route to legacy engine for actual compression
+        # 3. Try specialized strategy via dispatcher
+        t1 = time.perf_counter()
+        strat_result = None
+        strategy_name = plan.strategy
+        from kettu_squeeze.strategies.base import dispatcher as strat_dispatcher
+
+        strategy = strat_dispatcher.dispatch(content, source_type,
+            required_capabilities=[c for c in plan.strategy.split(",") if c] if plan.strategy else None,
+            level=plan.level.value)
+
+        in_tok = len(content) // 3
+
+        if strategy and strategy.descriptor.name != "none":
+            try:
+                strat_result = strategy.compress(content, plan.level.value)
+                strategy_name = strategy.descriptor.name
+                compress_ms = (time.perf_counter() - t1) * 1000
+
+                # Store through regular engine
+                request = CompressionRequest(
+                    content=strat_result.compressed, session_id=session_id, agent_id=agent_id,
+                    source_type=self._map_source_type(source_type), source_path=source_path,
+                )
+                response = self.engine.compress(request)
+
+                return response, ExecutionReport(
+                    action_executed=plan.action, level_executed=plan.level,
+                    strategy_used=strategy_name,
+                    input_tokens=in_tok, output_tokens=strat_result.compressed_tokens,
+                    compression_latency_ms=policy_ms + compress_ms,
+                    protected_fields_expected=strat_result.protected_fields_expected,
+                    protected_fields_preserved=strat_result.protected_fields_preserved,
+                    fallback_used=False,
+                ), None
+            except Exception:
+                pass  # fall through to legacy
+
+        # 4. Fallback: legacy engine
+        return self._compress_legacy_adaptive(content, plan, in_tok, policy_ms, session_id, agent_id, source_type, source_path)
+
+    def _compress_legacy_adaptive(self, content, plan, in_tok, policy_ms, session_id, agent_id, source_type, source_path):
+        """Fallback to legacy engine when specialized strategy unavailable."""
         request = CompressionRequest(
             content=content, session_id=session_id, agent_id=agent_id,
             source_type=self._map_source_type(source_type), source_path=source_path,
@@ -100,21 +142,13 @@ class EngineBridge:
         response = self.engine.compress(request)
         compress_ms = (time.perf_counter() - t1) * 1000
 
-        in_tok = len(content) // 3
-        out_tok = response.compressed_tokens
-
-        report = ExecutionReport(
-            action_executed=plan.action,
-            level_executed=plan.level,
-            strategy_used=plan.strategy,
-            input_tokens=in_tok,
-            output_tokens=out_tok,
+        return response, ExecutionReport(
+            action_executed=plan.action, level_executed=plan.level,
+            strategy_used="legacy_fallback",
+            input_tokens=in_tok, output_tokens=response.compressed_tokens,
             compression_latency_ms=policy_ms + compress_ms,
-            protected_fields_expected=len(plan.protected_fields),
-            protected_fields_preserved=len(plan.protected_fields),
-            fallback_used=False,
-        )
-        return response, report, None
+            fallback_used=True, fallback_chain=["specialized_unavailable", "legacy"],
+        ), None
 
     def _compress_shadow(self, content, session_id, agent_id, source_type, source_path, budget):
         """Shadow mode: legacy executes, adaptive runs in parallel for comparison."""
