@@ -56,13 +56,18 @@ class BulkGroup:
 # Grouper
 # ═══════════════════════════════════════════════════════════════════════════════
 def extract_template(line: str) -> str:
-    """Replace variable parts with <*> to find template."""
-    t = re.sub(r'[a-f0-9]{8,}', '<ID>', line)  # hashes
+    """Replace variable parts with <*> to find template. Aggressive normalization."""
+    t = line
+    t = re.sub(r'[a-f0-9]{8,}', '<ID>', t)  # hashes
+    t = re.sub(r'[a-f0-9]{6}-[a-f0-9]{4}', '<ID>', t)  # short hashes
     t = re.sub(r'\d{4}-\d{2}-\d{2}[T ]\d{2}:\d{2}:\d{2}', '<TS>', t)  # timestamps
+    t = re.sub(r'\d{2}:\d{2}:\d{2}', '<TIME>', t)  # time only
     t = re.sub(r'\b\d+\.\d+\.\d+\.\d+\b', '<IP>', t)  # IPs
     t = re.sub(r'\b\d+\b', '<N>', t)  # numbers
-    t = re.sub(r'/[a-zA-Z0-9_/.-]+', '<PATH>', t)  # paths
-    t = re.sub(r'\w+@\w+', '<ID>', t)  # identifiers with @
+    t = re.sub(r'port\s+\d+', 'port <N>', t)  # port
+    t = re.sub(r'/\w+[/\w.\-]*', '<PATH>', t)  # paths
+    t = re.sub(r'[a-zA-Z]\w*@[\w.]+', '<ID>', t)  # emails
+    t = re.sub(r'line\s+\d+', 'line <N>', t, flags=re.I)  # line numbers
     return t
 
 
@@ -196,15 +201,8 @@ def bulk_compact(content: str, critical_facts: list[str]) -> str:
     compacted = []
     total_saved = 0
     
-    # Keep track of critical fact lines — never collapse these
-    critical_line_indices = set()
-    for i, line in enumerate(lines):
-        if any(c in line.lower() for c in crit):
-            critical_line_indices.add(i)
-    
     for group in groups:
         compact = group.compact()
-        # Check if compact representation preserves critical facts
         compact_l = compact.lower()
         lost = [c for c in crit if c in content.lower() and c not in compact_l]
         
@@ -212,14 +210,93 @@ def bulk_compact(content: str, critical_facts: list[str]) -> str:
         saving = group.original_tokens - compact_tokens
         
         if lost or saving < 5:
-            # Fallback: keep original lines
             compacted.extend(group.fragments)
         else:
             compacted.append(compact)
             total_saved += saving
     
+    # Phase 2: aggressive packing on the result
     result = "\n".join(compacted)
+    result = aggressive_pack(result, critical_facts)
     return result
+
+
+def aggressive_pack(content: str, critical_facts: list[str]) -> str:
+    """Aggressive serialization: strip verbose markers, merge adjacent groups, compact JSON/test/log."""
+    crit = [c.lower() for c in critical_facts]
+    lines = content.split("\n")
+    result = []
+    prev_compact = ""
+    
+    for line in lines:
+        s = line.strip()
+        if not s:
+            if result and result[-1] != "": result.append("")
+            continue
+        
+        # Merge adjacent "×N" markers if they share the same base
+        if " ×" in s and "×" in s:
+            base = s.split(" ×")[0].strip()
+            mult_part = s.split("×")[-1].strip()
+            if prev_compact.startswith(base + " ") and "×" in prev_compact:
+                prev_mult = int(prev_compact.split("×")[-1].strip())
+                try:
+                    new_mult = int(mult_part)
+                    result[-1] = f"{base} ×{prev_mult + new_mult}"
+                    prev_compact = result[-1]
+                    continue
+                except: pass
+        
+        # Remove verbose section markers
+        if s.startswith(("SECTION:", "STATUS:", "GROUP:", "---", "===")):
+            continue
+        
+        # Compact JSON packing: strip quotes around simple values
+        if s.startswith('"') and s.count('"') >= 2:
+            # Try json key:value
+            parts = s.split(':', 1)
+            if len(parts) == 2:
+                key = parts[0].strip().strip('"')
+                val = parts[1].strip().strip('"').strip(',')
+                if len(key) < 40 and len(val) < 100:
+                    s = f"{key}={val}"
+        
+        # Test packing: collapse PASSED/PASSED lines
+        if re.match(r"^(test_\w+\s+PASSED|PASSED|^\d+\s+passed)", s, re.I):
+            if result and "PASSED" in result[-1].upper() and "×" not in result[-1]:
+                result[-1] = result[-1].rsplit("PASSED", 1)[0].strip() + " PASSED ×2"
+                prev_compact = result[-1]
+                continue
+            if result and "×" in result[-1] and "PASSED" in result[-1].upper():
+                try:
+                    cnt = int(result[-1].split("×")[-1].strip())
+                    result[-1] = result[-1].rsplit("×", 1)[0].strip() + f" ×{cnt+1}"
+                    prev_compact = result[-1]
+                    continue
+                except: pass
+        
+        # Log packing: collapse repeated single-word errors
+        if re.match(r"^\w+\s*$", s) and len(s) < 30:
+            if result and result[-1] == s:
+                result[-1] = f"{s} ×2"
+                prev_compact = result[-1]
+                continue
+            if result and " ×" in result[-1] and result[-1].startswith(s.split(" ×")[0]):
+                try:
+                    cnt = int(result[-1].split("×")[-1].strip())
+                    result[-1] = f"{s} ×{cnt+1}"
+                    prev_compact = result[-1]
+                    continue
+                except: pass
+        
+        # Keep line
+        result.append(s)
+        prev_compact = s
+    
+    # Remove trailing empty lines
+    while result and result[-1] == "": result.pop()
+    
+    return "\n".join(result)
 
 
 def compress_bulk_preserving(content: str, task_type: str, critical_facts: list[str]) -> dict:
