@@ -106,7 +106,7 @@ class LogCompressor(BaseCompressor):
     # Patterns safe to normalize (progress counters, timestamps, IDs, etc.)
     _SAFE_NORMALIZE_PATTERNS: list[tuple[str, str, str]] = [
         # progress counters: "item 42 processed"
-        (r'\b(\d+)\b', '<N>', 'progress_counter'),
+        (r'(?<![a-zA-Z_])\d+(?![a-zA-Z_])', '<N>', 'progress_counter'),
         # timestamps: ISO-ish
         (r'\d{4}-\d{2}-\d{2}[T ]\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:?\d{2})?', '<TS>', 'timestamp'),
         # request IDs: hex strings 8+ chars

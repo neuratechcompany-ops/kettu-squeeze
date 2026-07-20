@@ -64,9 +64,9 @@ _TEST_RESULT_PATTERNS = [
 
 # If more than N% of lines match log-like patterns, classify as log
 _LOG_PATTERNS = [
-    re.compile(r"\b(?:ERROR|WARN|INFO|DEBUG|TRACE|FATAL|CRITICAL)\b"),
+    re.compile(r"\b(?:ERR|WRN|INF|ERROR|WARN|INFO|DEBUG|TRACE|FATAL|CRITICAL)\b"),
     re.compile(r"\d{4}-\d{2}-\d{2}[T\s]\d{2}:\d{2}:\d{2}"),
-    re.compile(r"\[(?:ERROR|WARN|INFO|DEBUG|TRACE|FATAL|CRITICAL)\]"),
+    re.compile(r"\[(?:ERR|WRN|INF|ERROR|WARN|INFO|DEBUG|TRACE|FATAL|CRITICAL)\]"),
 ]
 
 
