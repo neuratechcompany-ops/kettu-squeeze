@@ -1,6 +1,6 @@
 [project]
 name = "kettu-squeeze"
-version = "0.5.4"
+version = "0.5.6"
 description = "Recoverable Context Optimization for AI agents"
 requires-python = ">=3.11"
 license = {text = "Apache-2.0"}

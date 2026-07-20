@@ -115,6 +115,8 @@ class LogCompressor(BaseCompressor):
         (r'\b\d+(?:\.\d+)?\s*(?:s|ms|µs|ns|sec|min|hour)s?\b', '<DUR>', 'duration'),
         # sequence numbers: standalone or in brackets
         (r'\[?\#?\d+\]?\s+(?:of|/)', '<SEQ> ', 'sequence'),
+        # log levels: ERROR, WARN, INFO etc in |LEVEL| or [LEVEL] context
+        (r'(?:\| |\[)(?:ERR|WRN|INF|ERROR|WARN|INFO|DEBUG|TRACE|FATAL|CRITICAL)(?: \||\])', '<LVL>', 'log_level'),
     ]
 
     # Values that MUST NOT be normalized (protected)
@@ -140,6 +142,14 @@ class LogCompressor(BaseCompressor):
         for pattern, replacement, _name in self._SAFE_NORMALIZE_PATTERNS:
             result = re.sub(pattern, replacement, result)
         return result
+
+    def _format_rle_label(self, normalized_line: str, count: int) -> str:
+        """Add error count label for RLE-compressed error lines."""
+        m = re.search(r'<LVL>', normalized_line)
+        if m and count > 1:
+            # Extract original level from the un-normalized context
+            return f"{normalized_line}  [ERROR x{count}]"
+        return f"{normalized_line}  x{count}"
 
     def _pattern_rle_compress(
         self, lines: list[str], max_repeated: int

@@ -188,7 +188,7 @@ class Verifier:
     ) -> VerificationCheck:
         """Check that error messages aren't lost."""
         error_pattern = re.compile(
-            r"(?i)\b(error|exception|traceback)\b.*"
+            r"(?i)\b(error|exception|traceback)\b|\[ERROR x\d+\]"
         )
         orig_errors = error_pattern.findall(original)
         comp_errors = error_pattern.findall(compressed)

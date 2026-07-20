@@ -18,6 +18,7 @@ src/kettu_squeeze/artifact_store/__init__.py
 src/kettu_squeeze/attribution/engine.py
 src/kettu_squeeze/bulk/engine.py
 src/kettu_squeeze/classifier/__init__.py
+src/kettu_squeeze/classifier/content_classifier.py
 src/kettu_squeeze/cli/main.py
 src/kettu_squeeze/compressors/__init__.py
 src/kettu_squeeze/context_ledger/__init__.py
@@ -43,5 +44,6 @@ tests/test_phase2.py
 tests/test_phase2_integration.py
 tests/test_phase2b_regression.py
 tests/test_policy.py
+tests/test_routing_regression.py
 tests/test_strategies.py
 tests/test_tasks.py
